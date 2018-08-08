@@ -1,0 +1,185 @@
+@font-face {
+    font-family: "folkard";
+    src: url("/fonts/folkard.woff") format('woff');
+}
+
+/*@font-face {*/
+/*    font-family: "perigord";*/
+/*    src: url("/fonts/perigord.woff") format('woff');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: "cardinal";*/
+/*    src: url("/fonts/cardinal.woff") format('woff');*/
+/*}*/
+
+
+@font-face {
+    font-family: "KnightsTemplar";
+    src: url("/fonts/KnightsTemplar.woff") format('woff');
+}
+
+html, body, #wrapper {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
+}
+
+#dm-link {
+  position: absolute;
+  bottom: 10%;
+  right: 4%;
+  color: white;
+  font-family: folkard, cardinal, palitino, serif;
+  font-size: 150%;
+}
+
+#dm-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.toolbar-wrapper {
+  text-align: center;
+}
+
+.btn-toolbar {
+  display: inline-block;
+}
+
+/* TODO: Remove later */
+#dmCanvas {
+  opacity: 0.5;
+  margin-bottom: 50px; /* to leave room for the control panel */
+}
+
+.fow-canvas {
+  opacity: 0.5;
+}
+
+.map-canvas {
+  margin-bottom: 50px; /* to leave room for the control panel */
+  max-width: 100%;
+}
+
+#render {
+  display: none;
+  float: right;
+}
+
+.splash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 100;
+  background-image: url('/images/DungeonEntranceMedium.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.title-font{
+  font-family: folkard, palitino, serif;
+}
+
+.title-text {
+  margin-top: 10%;
+  margin-left: 10%;
+  color: white;
+  font-family: folkard, palitino, serif;
+  font-size: 600%;
+}
+
+.navbar-brand {
+  font-family: folkard, palitino, serif;
+  font-size: 25px;
+  line-height: 40px;
+}
+
+.btn {
+  /*font-family: KnightsTemplar, palitino, serif;*/
+  /*font-size: 20px;*/
+}
+
+.auth-container {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+}
+
+#enter {
+  position: absolute;
+  left: calc(50% + 100px);
+  top: calc(50% + 70px);
+}
+
+
+.map {
+  position: absolute;
+  left: 0;
+  top: 0;
+  -webkit-transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
+  transition: opacity 2s ease-in-out;
+}
+
+.transparent {
+  opacity:0;
+}
+
+
+div#upload {
+  height: 500px;
+}
+
+.glass {
+  color: white;
+  font-family: perigord, palitino, serif;
+  border: none;
+  background-position: center;
+  background-color: transparent; /* temporary ? */
+}
+
+/* temporary ? */
+.glass:hover {
+  color: red;
+  font-family: perigord, palitino, serif;
+  border: none;
+  background-position: center;
+  background-color: transparent;
+}
+
+.glass::-webkit-input-placeholder {
+  color: white !important;
+  font-family: perigord, palitino, serif;
+  font-size: 150%;
+  text-transform: uppercase;
+}
+.glass::-moz-placeholder {
+  color: black !important;
+  font-family: KnightsTemplar, palitino, serif;
+}
+.glass:-moz-placeholder {
+  color: black !important;
+  font-family: KnightsTemplar, palitino, serif;
+}
+.glass:-ms-input-placeholder {
+  color: black !important;
+  font-family: KnightsTemplar, palitino, serif;
+}
+.glass::input-placeholder {
+  color: black !important;
+  font-family: perigord, palitino, serif;
+}
+
+@media (max-width:480px) {
+  .title-text {
+    font-size: 20vw;
+  }
+}

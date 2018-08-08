@@ -1,0 +1,8 @@
+extends layout.jade
+
+block content
+    include splash.jade
+    #map-container
+
+block js
+    script(data-main='/javascripts/player-app.js', src='/javascripts/require.js')
