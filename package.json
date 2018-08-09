@@ -2,7 +2,9 @@
   "name": "dungeon-mapper",
   "version": "0.0.1",
   "scripts": {
-    "start": "node ./bin/dungeon-mapper"
+    "start": "node ./bin/dungeon-mapper",
+    "test": "npm run lint",
+    "lint": "eslint ./app.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",

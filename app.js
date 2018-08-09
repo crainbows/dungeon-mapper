@@ -60,7 +60,7 @@ app.get('/', function (req, res) {
 app.get('/dm', function (req, res) {
     /* console.log( req.headers ); */
     if( req.headers['host'] == 'localhost:3000' ){
-    	res.render('dm', {dm: true, title: 'Dungeon Revealer DM Console'});
+        res.render('dm', {dm: true, title: 'Dungeon Revealer DM Console'});
     }
     else
     {
@@ -155,6 +155,7 @@ app.post('/send', function (req, res) {
         var imageData = decodeBase64Image(imageDataString).data;
         
         fs.writeFile(GENERATED_IMAGE_PATH, imageData, function (err) {
+            if(err) throw err;
             console.log('sent map saved');
         });
       
@@ -193,7 +194,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+    app.use(function (err, req, res) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -204,7 +205,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
     console.log(err);
     res.status(err.status || 500);
     res.render('error', {
@@ -229,7 +230,7 @@ io.on('connection', function(socket) {
 });
 
 function decodeBase64Image(dataString) {
-    var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+    var matches = dataString.match(/^data:([A-Za-z-+/]+);base64,(.+)$/),
       response = {};
   
     if (matches.length !== 3) {
