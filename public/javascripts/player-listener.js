@@ -11,10 +11,9 @@ define(['settings', 'jquery', 'io'], function (settings, jquery, io) {
             $('.map').addClass('oldest').css('z-index', '30');
             var oldMap = document.querySelector('.map');
             var newMap = new Image();
-            newMap.style.width = '100%';
             newMap.style.zIndex = 20;
             newMap.src = msg.imageData;
-            newMap.className = "map";
+            newMap.className = "map img-responsive center-block";
             document.getElementById('map-container').appendChild(newMap);
             $('.oldest').addClass('transparent');
         }
