@@ -38,3 +38,7 @@ node_modules
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Folders #
+###########
+coverage/
