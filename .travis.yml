@@ -1,0 +1,13 @@
+sudo: false
+language: node_js
+node_js:
+  - "6"
+  - "7"
+  - "8"
+  - "9"
+  - "10"
+  - "node"
+  - "lts/*"
+cache:
+  directories:
+    - "node_modules"
