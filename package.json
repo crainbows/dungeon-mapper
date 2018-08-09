@@ -22,8 +22,6 @@
   "description": "dungeon-mapper ================",
   "main": "app.js",
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-eslint": "^8.2.6",
     "eslint": "^5.3.0",
     "eslint-plugin-jest": "^21.19.0",
     "jest": "^23.4.2",
