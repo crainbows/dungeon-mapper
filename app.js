@@ -30,7 +30,7 @@ app.use(busboy());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // Not sure if this is needed, Chrome seems to grab the favicon just fine anyway
 // Maybe for cross-browser support
