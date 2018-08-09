@@ -1,8 +1,8 @@
 {
-  "name": "dungeon-revealer",
+  "name": "dungeon-mapper",
   "version": "0.0.1",
   "scripts": {
-    "start": "node ./bin/dungeon-revealer"
+    "start": "node ./bin/dungeon-mapper"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -16,17 +16,22 @@
     "serve-favicon": "~2.4.5",
     "socket.io": "^2.1.1"
   },
-  "description": "dungeon-revealer ================",
+  "description": "dungeon-mapper ================",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-plugin-jest": "^21.19.0",
+    "jest": "^23.4.2",
+    "supertest": "^3.1.0"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/apclary/dungeon-revealer.git"
+    "url": "https://github.com/crainbows/dungeon-mapper.git"
   },
-  "author": "apclary",
+  "author": "Crainbows",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/apclary/dungeon-revealer/issues"
+    "url": "https://github.com/crainbows/dungeon-mapper/issues"
   },
-  "homepage": "https://github.com/apclary/dungeon-revealer"
+  "homepage": "https://github.com/crainbows/dungeon-mapper"
 }
