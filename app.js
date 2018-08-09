@@ -116,7 +116,7 @@ app.get('/dm/map', function (req, res) {
     }
       
     if (!mapSent) {
-        res.sendStatus(404);
+        res.sendStatus(403);
     }
 });
 
