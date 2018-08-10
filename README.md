@@ -2,10 +2,11 @@ dungeon-mapper
 ================
 
 [![Travis (.org)](https://img.shields.io/travis/Crainbows/dungeon-mapper.svg?style=flat-square)](https://travis-ci.org/Crainbows/dungeon-mapper)
+[![Requires.io](https://img.shields.io/requires/github/Crainbows/dungeon-mapper.svg?style=flat-square)](https://requires.io/github/Crainbows/dungeon-mapper/requirements/)
 [![GitHub issues](https://img.shields.io/github/issues-raw/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
 [![GitHub](https://img.shields.io/github/license/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
 [![GitHub tag](https://img.shields.io/github/tag/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
-[![Requires.io](https://img.shields.io/requires/github/Crainbows/dungeon-mapper.svg?style=flat-square)](https://requires.io/github/Crainbows/dungeon-mapper/requirements/)
+
 
 Originally forked from `apclary/dungeon-revealer`, now updated and maintained.
 A web app for tabletop gaming to allow the game master to reveal areas of the game map to players.
