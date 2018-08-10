@@ -218,8 +218,8 @@ define(['settings', 'jquery', 'brush'], function (settings, jquery, brush) {
         function fitMapToWindow() {
             var oldWidth = parseInt(mapImageCanvas.style.width || mapImageCanvas.width, 10),
                 oldHeight = parseInt(mapImageCanvas.style.height || mapImageCanvas.height, 10),
-                newDims = getOptimalDimensions(oldWidth, oldHeight, $(window).width(), $(window).height()-100);
-                
+                newDims = getOptimalDimensions(mapImageCanvas.width, mapImageCanvas.height, $(window).width(), $(window).height());
+
             resize(newDims.width, newDims.height);
         }
 
