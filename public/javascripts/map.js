@@ -142,7 +142,7 @@ define(['settings', 'jquery', 'brush'], function (settings, jquery, brush) {
         }
 
         function getOptimalDimensions(idealWidth, idealHeight, maxWidth, maxHeight) {
-            var ratio = Math.min(maxWidth / idealWidth, maxHeight / idealHeight);
+            var ratio = Math.min(maxWidth / idealWidth, (maxHeight-150) / idealHeight);
 
             return {
                 ratio: ratio,
