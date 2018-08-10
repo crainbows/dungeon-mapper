@@ -212,6 +212,13 @@ define(['settings', 'jquery', 'brush'], function (settings, jquery, brush) {
             mapImageCanvas.style.height = displayHeight + 'px';
             cursorCanvas.style.width = displayWidth + 'px';
             cursorCanvas.style.height = displayHeight + 'px';
+            
+            if($(window).width() > displayWidth){
+                let offset = ($(window).width() - displayWidth) / 2;
+                fowCanvas.style.left = offset + 'px';
+                mapImageCanvas.style.left = offset + 'px';
+                cursorCanvas.style.left = offset + 'px';
+            }            
         }
 
         // Maybe having this here violates cohesion
