@@ -1,6 +1,6 @@
 {
   "name": "dungeon-mapper",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "start": "node ./bin/dungeon-mapper",
     "test": "npm run lint && npm run jest",
