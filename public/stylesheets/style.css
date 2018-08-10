@@ -129,6 +129,14 @@ html, body, #wrapper {
   transition: opacity 2s ease-in-out;
 }
 
+#map-container > img {
+  position: absolute!important;
+  top: 50%!important;
+  left: 50%;
+  margin-right: -50%!important;
+  transform: translate(-50%, -50%);
+}
+
 .transparent {
   opacity:0;
 }
