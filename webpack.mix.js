@@ -1,5 +1,10 @@
 let mix = require('laravel-mix');
-
+mix.setPublicPath('public');
+mix.webpackConfig({
+    node: {
+      fs: "empty"
+    }
+});
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,7 +16,7 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('src/javascripts/dm-app.js', 'public/javascripts/dm-app.js');
+mix.js('src/javascripts/player-app.js', 'public/javascripts/player-app.js');
 
 // Full API
 // mix.js(src, output);
