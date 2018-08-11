@@ -25,6 +25,7 @@
     "eslint": "^5.3.0",
     "eslint-plugin-jest": "^21.19.0",
     "jest": "^23.4.2",
+    "laravel-mix": "^2.1.11",
     "supertest": "^3.1.0"
   },
   "jest": {
