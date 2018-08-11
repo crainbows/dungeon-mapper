@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 import jQuery from "jquery";
-window.$ = window.jQuery = jQuery;
-
+window.jQuery = jQuery;
+const $ = jQuery;
 
 console.log('player.js starting');
 var  socket = io();
@@ -12,7 +12,7 @@ socket.on('map update', function (msg) {
         console.log('got a map update');
         $('.oldest').remove();
         $('.map').addClass('oldest').css('z-index', '30');
-        var oldMap = document.querySelector('.map');
+        // var oldMap = document.querySelector('.map'); eslint - Unused var - Kept incase of unknow breaking changes
         var newMap = new Image();
         newMap.style.zIndex = 20;
         newMap.src = msg.imageData;
