@@ -17,6 +17,7 @@ mix.webpackConfig({
  */
 
 mix.js('src/javascripts/player-app.js', 'public/javascripts/player-app.js');
+mix.js('src/javascripts/dm-app.js', 'public/javascripts/dm-app.js');
 
 // Full API
 // mix.js(src, output);
