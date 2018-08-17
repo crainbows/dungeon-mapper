@@ -6,7 +6,7 @@ export default function (context, settings) {
         throw new Error('Invalid args');
     }
 
-    var brushTypes = ["clear", "fog"],
+    let brushTypes = ["clear", "fog"],
         currentBrushType = brushTypes[0],
         setBrushType = function () {
             console.error("Doesn't exist yet");
