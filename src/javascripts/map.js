@@ -18,8 +18,6 @@ export default function () {
     originalCords,
     lineWidth = settings.defaultLineWidth,
     brushShape = settings.defaultBrushShape;
-  // fogOpacity = settings.fogOpacity,
-  // fogRGB = settings.fogRGB;
 
   function extend(obj1, obj2) {
     obj1 = obj1 || {};
@@ -474,15 +472,8 @@ export default function () {
     });
 
     document.addEventListener('mouseup', function () {
-      stopDrawing();
+      isDrawing = false;
     });
-  }
-
-  function stopDrawing() {
-    if (isDrawing) {
-      createRender();
-    }
-    isDrawing = false;
   }
 
   //todo: move this functionality elsewher
@@ -507,6 +498,7 @@ export default function () {
 
   return {
     create: create,
+    createRender: createRender,
     toImage: toImage,
     resize: resize,
     remove: remove,

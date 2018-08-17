@@ -68,6 +68,7 @@ $('#btn-new-map').click(function() {
 
 
 $('#btn-send').click(function () {
+    dmMap.createRender();
     var imageData = document.getElementById('render').src;
     
     axios.post('/send', {
