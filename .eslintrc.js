@@ -15,6 +15,7 @@ module.exports = {
     },
     parser: "babel-eslint",
     rules: {
-      'no-console': ['warn']
+      'no-console': ['warn'],
+      "indent": ["error", 2]
     },
   };
