@@ -262,28 +262,40 @@ export default function () {
   }
 
   function findOptimalRhombus(pointCurrent, pointPrevious) {
-    let rhombusCoords = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}];
-    if ((pointCurrent.x < pointPrevious.x && pointCurrent.y > pointPrevious.y) || (pointCurrent.x > pointPrevious.x && pointCurrent.y < pointPrevious.y)){
+    let rhombusCoords = [{
+      x: 0,
+      y: 0
+    }, {
+      x: 0,
+      y: 0
+    }, {
+      x: 0,
+      y: 0
+    }, {
+      x: 0,
+      y: 0
+    }];
+    if ((pointCurrent.x < pointPrevious.x && pointCurrent.y > pointPrevious.y) || (pointCurrent.x > pointPrevious.x && pointCurrent.y < pointPrevious.y)) {
       // Moving NE or SW /
-      rhombusCoords[0].x = pointCurrent.x + lineWidth/2;
-      rhombusCoords[0].y = pointCurrent.y + lineWidth/2;
-      rhombusCoords[1].x = pointPrevious.x + lineWidth/2;
-      rhombusCoords[1].y = pointPrevious.y + lineWidth/2;
-      rhombusCoords[2].x = pointPrevious.x - lineWidth/2;
-      rhombusCoords[2].y = pointPrevious.y - lineWidth/2;
-      rhombusCoords[3].x = pointCurrent.x - lineWidth/2;
-      rhombusCoords[3].y = pointCurrent.y - lineWidth/2;
+      rhombusCoords[0].x = pointCurrent.x + lineWidth / 2;
+      rhombusCoords[0].y = pointCurrent.y + lineWidth / 2;
+      rhombusCoords[1].x = pointPrevious.x + lineWidth / 2;
+      rhombusCoords[1].y = pointPrevious.y + lineWidth / 2;
+      rhombusCoords[2].x = pointPrevious.x - lineWidth / 2;
+      rhombusCoords[2].y = pointPrevious.y - lineWidth / 2;
+      rhombusCoords[3].x = pointCurrent.x - lineWidth / 2;
+      rhombusCoords[3].y = pointCurrent.y - lineWidth / 2;
       return rhombusCoords;
-    } else if ((pointCurrent.x > pointPrevious.x && pointCurrent.y > pointPrevious.y) || (pointCurrent.x < pointPrevious.x && pointCurrent.y < pointPrevious.y)){
+    } else if ((pointCurrent.x > pointPrevious.x && pointCurrent.y > pointPrevious.y) || (pointCurrent.x < pointPrevious.x && pointCurrent.y < pointPrevious.y)) {
       // Moving NW or SE \
-      rhombusCoords[0].x = pointCurrent.x - lineWidth/2;
-      rhombusCoords[0].y = pointCurrent.y + lineWidth/2;
-      rhombusCoords[1].x = pointPrevious.x - lineWidth/2;
-      rhombusCoords[1].y = pointPrevious.y + lineWidth/2;
-      rhombusCoords[2].x = pointPrevious.x + lineWidth/2;
-      rhombusCoords[2].y = pointPrevious.y - lineWidth/2;
-      rhombusCoords[3].x = pointCurrent.x + lineWidth/2;
-      rhombusCoords[3].y = pointCurrent.y - lineWidth/2;
+      rhombusCoords[0].x = pointCurrent.x - lineWidth / 2;
+      rhombusCoords[0].y = pointCurrent.y + lineWidth / 2;
+      rhombusCoords[1].x = pointPrevious.x - lineWidth / 2;
+      rhombusCoords[1].y = pointPrevious.y + lineWidth / 2;
+      rhombusCoords[2].x = pointPrevious.x + lineWidth / 2;
+      rhombusCoords[2].y = pointPrevious.y - lineWidth / 2;
+      rhombusCoords[3].x = pointCurrent.x + lineWidth / 2;
+      rhombusCoords[3].y = pointCurrent.y - lineWidth / 2;
       return rhombusCoords;
     }
   }
@@ -380,7 +392,7 @@ export default function () {
 
     fowCanvas.draw = function (newCords) {
       if (!isDrawing) return;
-      if (newCords == originalCords) {console.log('nochange');return;}
+      if (newCords == originalCords) return;
 
       // For each point create a quadraticCurve btweeen each point
       if (brushShape == 'round') {
@@ -391,7 +403,7 @@ export default function () {
         fowContext.beginPath();
 
         fowContext.moveTo(newCords.x, newCords.y);
-        
+
         // Coordinates
         let midPoint = midPointBtw(originalCords, newCords);
         fowContext.quadraticCurveTo(originalCords.x, originalCords.y, midPoint.x, midPoint.y);
