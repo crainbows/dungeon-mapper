@@ -319,88 +319,32 @@ export default function () {
     };
   }
 
-  // Finds the optimal rhombus to act as a connecting path between two square masks
-  // This function takes the coordinates of the current and previous square masks and compares the distances to the
-  // midpoint between the two squares to find the correct rhombus that describes a smooth fill between the two.
-  // You could achieve the same thing by constructing four walls around each set of
-  // squares, but you would end up with 4x as many "connecting" objects -> poor performance
-  // Note: I'm pretty sure I've just recreated some standard geometry algorithm and this whole section
-  // could be swapped out with a function.
+
   function findOptimalRhombus(pointCurrent, pointPrevious) {
-    // Find midpoint between two points
-    let midPoint = midPointBtw(pointPrevious, pointCurrent)
-
-    // Exten d points to coordinates
-    let pointCurrentCoordinates = constructCoordinates(pointCurrent),
-      pointPreviousCoordinates = constructCoordinates(pointPrevious)
-
-    // Arrays and Objects
-    let allPoints = [], // All points are placed into this array
-      counts = {}, // count distinct of distances
-      limitedPoints // subset of correct points
-
-    // Load the points into allpoints with a field documenting their origin and corner
-    for (let key = 0; key < pointCurrentCoordinates.length; key++) {
-      pointCurrentCoordinates[key].corner = key;
-      pointCurrentCoordinates[key].version = 2;
-      allPoints.push(pointCurrentCoordinates[key])
+    let rhombusCoords = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}];
+    if ((pointCurrent.x < pointPrevious.x && pointCurrent.y > pointPrevious.y) || (pointCurrent.x > pointPrevious.x && pointCurrent.y < pointPrevious.y)){
+      // Moving NE or SW /
+      rhombusCoords[0].x = pointCurrent.x + lineWidth/2;
+      rhombusCoords[0].y = pointCurrent.y + lineWidth/2;
+      rhombusCoords[1].x = pointPrevious.x + lineWidth/2;
+      rhombusCoords[1].y = pointPrevious.y + lineWidth/2;
+      rhombusCoords[2].x = pointPrevious.x - lineWidth/2;
+      rhombusCoords[2].y = pointPrevious.y - lineWidth/2;
+      rhombusCoords[3].x = pointCurrent.x - lineWidth/2;
+      rhombusCoords[3].y = pointCurrent.y - lineWidth/2;
+      return rhombusCoords;
+    } else if ((pointCurrent.x > pointPrevious.x && pointCurrent.y > pointPrevious.y) || (pointCurrent.x < pointPrevious.x && pointCurrent.y < pointPrevious.y)){
+      // Moving NW or SE \
+      rhombusCoords[0].x = pointCurrent.x - lineWidth/2;
+      rhombusCoords[0].y = pointCurrent.y + lineWidth/2;
+      rhombusCoords[1].x = pointPrevious.x - lineWidth/2;
+      rhombusCoords[1].y = pointPrevious.y + lineWidth/2;
+      rhombusCoords[2].x = pointPrevious.x + lineWidth/2;
+      rhombusCoords[2].y = pointPrevious.y - lineWidth/2;
+      rhombusCoords[3].x = pointCurrent.x + lineWidth/2;
+      rhombusCoords[3].y = pointCurrent.y - lineWidth/2;
+      return rhombusCoords;
     }
-    for (let key = 0; key < pointPreviousCoordinates.length; key++) {
-      pointPreviousCoordinates[key].corner = key;
-      pointPreviousCoordinates[key].version = 1;
-      allPoints.push(pointPreviousCoordinates[key])
-    }
-
-    // For each point find the distance between the cord and the midpoint
-    for (let j = 0, allPointsLength = allPoints.length; j < allPointsLength; j++) {
-      allPoints[j].distance = distanceBetweenCords(midPoint, allPoints[j]).toFixed(10)
-    }
-
-    // count distinct distances into counts object
-    allPoints.forEach(function (x) {
-      let distance = x.distance;
-      counts[distance] = (counts[distance] || 0) + 1;
-    });
-
-    // Sort allPoints by distance
-    allPoints.sort(function (a, b) {
-      return a.distance - b.distance;
-    });
-
-    // There are three scenarios
-    // 1. the squares are perfectly vertically or horizontally aligned:
-    ////  In this case, there will be two distinct lengths between the mid point, In this case, we want to take
-    ////  the coordinates with the shortest distance to the midpoint
-    // 2. The squares are offset vertically and horizontally. In this case, there will be 3 or 4 distinct lengths between
-    ////  the coordinates, 2 that are the shortest, 4 that are in the middle, and 2 that are the longest. We want
-    ////  the middle 4
-
-    // Determine the number of distances
-    let numberOfDistances = Object.keys(counts).length;
-
-    if (numberOfDistances == 2) {
-      limitedPoints = allPoints.slice(0, 4)
-    } else if (numberOfDistances == 3 || numberOfDistances == 4) {
-      limitedPoints = allPoints.slice(2, 6)
-    } else {
-      // if the distance is all the same, the square masks haven't moved, so just return
-      return
-    }
-
-    // error checking
-    if (limitedPoints.length != 4) {
-      throw new Error('unexpected number of points')
-    }
-
-    let limitedPointsSorted = limitedPoints.sort(orderByProperty('corner', 'version'));
-    if (numberOfDistances > 2) {
-      // for horizontally and verically shifted, the sort order needs a small hack so the drawing of the
-      // rectangle works correctly
-      let temp = limitedPointsSorted[2];
-      limitedPointsSorted[2] = limitedPointsSorted[3];
-      limitedPointsSorted[3] = temp
-    }
-    return limitedPointsSorted
   }
 
   function setupCursorTracking() {
@@ -514,56 +458,28 @@ export default function () {
         fowContext.stroke();
         originalCords = newCords;
       } else if (brushShape == 'square') {
-        // The goal of this area is to draw lines with a square mask
-
-        // The fundamental issue is that not every position of the mouse is recorded when it is moved
-        // around the canvas (particularly when it is moved fast). If it were, we could simply draw a
-        // square at every single coordinate
-
-        // a simple approach is to draw an initial square then connect a line to a series of
-        // central cords with a square lineCap. Unfortunately, this has undesirable behavior. When moving in
-        // a diagonal, the square linecap rotates into a diamond, and "draws" outside of the square mask.
-
-        // Using 'butt' lineCap lines to connect between squares drawn at each set of cords has unexpected behavior.
-        // When moving in a diagonal fashion. The width does not correspond to the "face" of the cursor, which
-        // maybe longer then the length / width (think hypotenuse) which results in weird drawing.
-
-        // The current solution is two fold
-        // 1. Draw a rectangle at every available cord
-        // 2. Find and draw the optimal rhombus to connect each square
 
         fowContext.lineWidth = 1
         fowContext.beginPath();
 
-        // The initial square mask is drawn by drawInitial, so we doing need to start at points[0].
-        // Therefore we start point[1].
-        for (let i = 1, len = points.length; i < len; i++) {
-          // Setup points
-          pointCurrent = points[i];
-          pointPrevious = points[i - 1];
+        // draw rectangle at current point
+        let fowMask = constructMask(newCords);
+        fowContext.fillRect(
+          fowMask.centerX,
+          fowMask.centerY,
+          fowMask.height,
+          fowMask.width);
 
-          if (!pointCurrent || !pointPrevious) {
-            throw new Error('points are incorrect')
-          }
-
-          // draw rectangle at current point
-          let fowMask = constructMask(pointCurrent);
-          fowContext.fillRect(
-            fowMask.centerX,
-            fowMask.centerY,
-            fowMask.height,
-            fowMask.width);
-
-          // optimal polygon to draw to connect two square
-          let optimalPoints = findOptimalRhombus(pointCurrent, pointPrevious);
-          if (optimalPoints) {
-            fowContext.moveTo(optimalPoints[0].x, optimalPoints[0].y);
-            fowContext.lineTo(optimalPoints[1].x, optimalPoints[1].y);
-            fowContext.lineTo(optimalPoints[2].x, optimalPoints[2].y);
-            fowContext.lineTo(optimalPoints[3].x, optimalPoints[3].y);
-            fowContext.fill();
-          }
+        // optimal polygon to draw to connect two square
+        let optimalPoints = findOptimalRhombus(newCords, originalCords);
+        if (optimalPoints) {
+          fowContext.moveTo(optimalPoints[0].x, optimalPoints[0].y);
+          fowContext.lineTo(optimalPoints[1].x, optimalPoints[1].y);
+          fowContext.lineTo(optimalPoints[2].x, optimalPoints[2].y);
+          fowContext.lineTo(optimalPoints[3].x, optimalPoints[3].y);
+          fowContext.fill();
         }
+        originalCords = newCords;
       }
     };
 
