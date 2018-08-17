@@ -16,6 +16,7 @@ export default function () {
     height,
     isDrawing = false,
     points = [],
+    originalCords,
     lineWidth = settings.defaultLineWidth,
     brushShape = settings.defaultBrushShape;
   // fogOpacity = settings.fogOpacity,
@@ -420,14 +421,12 @@ export default function () {
     // Mouse Move
     cursorCanvas.onmousemove = function (e) {
       //get cords and points
-      let cords = getMouseCoordinates(e);
+      let newCords = getMouseCoordinates(e);
       if (isDrawing) {
-        points.push(cords)
+        fowCanvas.draw(newCords);
       }
-      console.log(points.length);
       // Draw cursor and fow
-      cursorCanvas.drawCursor(cords);
-      fowCanvas.draw();
+      cursorCanvas.drawCursor(newCords);
     };
 
     cursorCanvas.drawCursor = function (cords) {
@@ -468,7 +467,7 @@ export default function () {
 
   function setUpDrawingEvents() {
     fowCanvas.drawInitial = function (coords) {
-
+      originalCords = coords;
       // Construct mask dimensions
       let fowMask = constructMask(coords);
       fowContext.lineWidth = fowMask.lineWidth;
@@ -495,11 +494,9 @@ export default function () {
       fowContext.stroke();
     };
 
-    fowCanvas.draw = function () {
+    fowCanvas.draw = function (newCords) {
       if (!isDrawing) return;
-
-      let pointPrevious, // the previous point
-        pointCurrent = points[0]; //  the current point
+      if (newCords == originalCords) {console.log('nochange');return;}
 
       // For each point create a quadraticCurve btweeen each point
       if (brushShape == 'round') {
@@ -509,17 +506,13 @@ export default function () {
         fowContext.lineJoin = fowContext.lineCap = 'round';
         fowContext.beginPath();
 
-        fowContext.moveTo(pointCurrent.x, pointCurrent.y);
-        for (let i = 1, len = points.length; i < len; i++) {
-          // Setup points
-          pointCurrent = points[i];
-          pointPrevious = points[i - 1];
-
-          // Coordinates
-          let midPoint = midPointBtw(pointPrevious, pointCurrent);
-          fowContext.quadraticCurveTo(pointPrevious.x, pointPrevious.y, midPoint.x, midPoint.y);
-          fowContext.stroke();
-       }
+        fowContext.moveTo(newCords.x, newCords.y);
+        
+        // Coordinates
+        let midPoint = midPointBtw(originalCords, newCords);
+        fowContext.quadraticCurveTo(originalCords.x, originalCords.y, midPoint.x, midPoint.y);
+        fowContext.stroke();
+        originalCords = newCords;
       } else if (brushShape == 'square') {
         // The goal of this area is to draw lines with a square mask
 
