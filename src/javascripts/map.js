@@ -347,7 +347,6 @@ export default function () {
 
       cursorContext.fill();
       cursorContext.stroke();
-      requestAnimationFrame(setupCursorTracking)
     }
 
   }
