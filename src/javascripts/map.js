@@ -15,7 +15,6 @@ export default function () {
     width,
     height,
     isDrawing = false,
-    points = [],
     originalCords,
     lineWidth = settings.defaultLineWidth,
     brushShape = settings.defaultBrushShape;
@@ -264,62 +263,6 @@ export default function () {
 
   }
 
-  // Constructs the corner coordinates of a square given its central cord and the global lineWidth. The square is
-  // described in a clockwise fashion
-  function constructCoordinates(cords) {
-    // Corners
-    // 1 - bottom left
-    // 2 - top left
-    // 3 - top right
-    // 4 - bottom right
-
-    // Note: 0,0 starts in top left. Remember this when doing calculations for corners, the y axis calculations
-    // need to be flipped vs bottom left orientation
-
-    let r = lineWidth / 2;
-    return {
-      1: {
-        x: cords.x - r,
-        y: cords.y + r
-      },
-      2: {
-        x: cords.x - r,
-        y: cords.y - r
-      },
-      3: {
-        x: cords.x + r,
-        y: cords.y - r
-      },
-      4: {
-        x: cords.x + r,
-        y: cords.y + r
-      }
-    }
-  }
-
-  // Pythagorean theorem for distance between two cords
-  function distanceBetweenCords(cords1, cords2) {
-    let a = cords1.x - cords2.x
-    let b = cords1.y - cords2.y
-
-    let distance = Math.sqrt(a * a + b * b);
-
-    return distance
-  }
-
-  // Stolen function for multi attribute sort
-  function orderByProperty(prop) {
-    let args = Array.prototype.slice.call(arguments, 1);
-    return function (a, b) {
-      let equality = a[prop] - b[prop];
-      if (equality === 0 && arguments.length > 1) {
-        return orderByProperty.apply(null, args)(a, b);
-      }
-      return equality;
-    };
-  }
-
-
   function findOptimalRhombus(pointCurrent, pointPrevious) {
     let rhombusCoords = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}];
     if ((pointCurrent.x < pointPrevious.x && pointCurrent.y > pointPrevious.y) || (pointCurrent.x > pointPrevious.x && pointCurrent.y < pointPrevious.y)){
@@ -541,8 +484,6 @@ export default function () {
       createRender();
     }
     isDrawing = false;
-    points = []
-    points.length = 0;
   }
 
   //todo: move this functionality elsewher
