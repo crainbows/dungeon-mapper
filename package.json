@@ -5,7 +5,7 @@
     "start": "node ./bin/dungeon-mapper",
     "test": "npm run lint && npm run jest",
     "jest": "jest --detectOpenHandles",
-    "lint": "eslint ./app.js src/",
+    "lint": "eslint ./*.js src/ --fix",
     "dev": "node node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "node node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production": "node node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"

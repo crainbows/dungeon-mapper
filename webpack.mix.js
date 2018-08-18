@@ -1,9 +1,9 @@
 let mix = require('laravel-mix');
 mix.setPublicPath('public');
 mix.webpackConfig({
-    node: {
-      fs: "empty"
-    }
+  node: {
+    fs: "empty"
+  }
 });
 /*
  |--------------------------------------------------------------------------
