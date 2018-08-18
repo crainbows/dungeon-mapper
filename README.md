@@ -5,6 +5,7 @@ Dungeon Mapper
 [![Requires.io](https://img.shields.io/requires/github/Crainbows/dungeon-mapper.svg?style=flat-square)](https://requires.io/github/Crainbows/dungeon-mapper/requirements/)
 [![GitHub issues](https://img.shields.io/github/issues-raw/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
 [![Code Climate](https://img.shields.io/codeclimate/maintainability/Crainbows/dungeon-mapper.svg?style=flat-square)](https://codeclimate.com/github/Crainbows/dungeon-mapper)
+[![Code Climate](https://img.shields.io/codeclimate/coverage/Crainbows/dungeon-mapper.svg?style=flat-square)](https://codeclimate.com/github/Crainbows/dungeon-mapper)
 [![GitHub](https://img.shields.io/github/license/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
 [![GitHub tag](https://img.shields.io/github/tag/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
 
