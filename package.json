@@ -1,11 +1,11 @@
 {
   "name": "dungeon-mapper",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "scripts": {
-    "start": "node ./bin/dungeon-mapper",
+    "start": "node ./bin/dungeon-mapper.js",
     "test": "npm run lint && npm run jest",
     "jest": "jest --detectOpenHandles",
-    "lint": "eslint ./app.js src/",
+    "lint": "eslint ./app.js src/ bin/",
     "dev": "node node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "node node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production": "node node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"

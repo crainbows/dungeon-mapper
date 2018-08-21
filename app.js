@@ -54,13 +54,13 @@ app.use(session({secret: generateKey()}));
 // Routes
 // TODO: Move interior logic somewhere else
 app.get('/', function (req, res) {
-  res.render('player', {dm: false, title: 'Dungeon Revealer'});
+  res.render('player', {dm: false, title: 'Dungeon Mapper'});
 });
 
 app.get('/dm', function (req, res) {
   /* console.log( req.headers ); */
   if( req.headers['host'] == 'localhost:3000' ){
-    res.render('dm', {dm: true, title: 'Dungeon Revealer DM Console'});
+    res.render('dm', {dm: true, title: 'Dungeon Mapper DM Console'});
   }
   else
   {
