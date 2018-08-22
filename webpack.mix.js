@@ -1,9 +1,9 @@
 let mix = require('laravel-mix');
 mix.setPublicPath('public');
 mix.webpackConfig({
-    node: {
-      fs: "empty"
-    }
+  node: {
+    fs: "empty"
+  }
 });
 /*
  |--------------------------------------------------------------------------
@@ -18,6 +18,7 @@ mix.webpackConfig({
 
 mix.js('src/javascripts/player-app.js', 'public/javascripts/player-app.js');
 mix.js('src/javascripts/dm-app.js', 'public/javascripts/dm-app.js');
+mix.sass('src/stylesheets/style.scss', 'public/stylesheets/style.css');
 
 // Full API
 // mix.js(src, output);
