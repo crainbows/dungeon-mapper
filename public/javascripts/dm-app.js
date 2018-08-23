@@ -15112,7 +15112,7 @@ function create(parentElem, opts) {
     fowContext = fowCanvas.getContext('2d');
     cursorContext = cursorCanvas.getContext('2d');
     copyCanvas(mapImageContext, createImageCanvas(mapImage));
-    fowBrush = Object(__WEBPACK_IMPORTED_MODULE_2__brush__["a" /* default */])(fowContext, opts);
+    fowBrush = new __WEBPACK_IMPORTED_MODULE_2__brush__["a" /* default */](fowContext, opts);
     fowContext.strokeStyle = fowBrush.getCurrent();
     fogMap();
     createRender();
@@ -15511,54 +15511,60 @@ function createPlayerMapImage(bottomCanvas, topCanvas) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = (function (context, settings) {
-  console.log('creating brush');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-  if (!context || !settings) {
-    throw new Error('Invalid args');
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Brush = function () {
+  function Brush(context, settings) {
+    _classCallCheck(this, Brush);
+
+    if (!context || !settings) {
+      throw new Error('Invalid args');
+    }
+    this.context = context;
+    this.settings = settings;
+    this.brushTypes = ["clear", "fog"];
+    this.currentBrushType = this.brushTypes[0];
   }
 
-  var brushTypes = ["clear", "fog"],
-      currentBrushType = brushTypes[0],
-      setBrushType = function setBrushType() {
-    console.error("Doesn't exist yet");
-  },
-      toggle = function toggle() {
-    if (currentBrushType === brushTypes[0]) {
-      console.log("shroud brush set");
-      currentBrushType = brushTypes[1];
-    } else if (currentBrushType === brushTypes[1]) {
+  // Future implementation
+  // setBrushType() {
+  //   console.error("Doesn't exist yet");
+  // }
 
-      console.log("clear brush set");
-      currentBrushType = brushTypes[0];
-    } else {
-      console.log("nothing: ");
-      console.log(currentBrushType);
+  _createClass(Brush, [{
+    key: "toggle",
+    value: function toggle() {
+      if (this.currentBrushType === this.brushTypes[0]) {
+        this.currentBrushType = this.brushTypes[1];
+      } else if (this.currentBrushType === this.brushTypes[1]) {
+        this.currentBrushType = this.brushTypes[0];
+      }
+      this.context.strokeStyle = this.getCurrent();
     }
-    context.strokeStyle = getCurrent();
-  },
-      getPattern = function getPattern(brushType) {
-    if (brushType === brushTypes[0]) {
-      context.globalCompositeOperation = 'destination-out';
-      return 'rgba(' + settings.fogRGB + ',' + settings.fogOpacity + ')';
-    } else if (brushType === brushTypes[1]) {
-      context.globalCompositeOperation = 'source-over';
-      return 'rgba(' + settings.fogRGB + ',' + settings.fogOpacity + ')';
+  }, {
+    key: "getPattern",
+    value: function getPattern(brushType) {
+      if (brushType === this.brushTypes[0]) {
+        this.context.globalCompositeOperation = 'destination-out';
+        return 'rgba(' + this.settings.fogRGB + ',' + this.settings.fogOpacity + ')';
+      } else if (brushType === this.brushTypes[1]) {
+        this.context.globalCompositeOperation = 'source-over';
+        return 'rgba(' + this.settings.fogRGB + ',' + this.settings.fogOpacity + ')';
+      }
     }
-  },
-      getCurrent = function getCurrent() {
-    return getPattern(currentBrushType);
-  };
+  }, {
+    key: "getCurrent",
+    value: function getCurrent() {
+      return this.getPattern(this.currentBrushType);
+    }
+  }]);
 
-  return {
-    brushTypes: brushTypes,
-    currentBrushType: currentBrushType,
-    setBrushType: setBrushType,
-    toggle: toggle,
-    getCurrent: getCurrent,
-    getPattern: getPattern
-  };
-});
+  return Brush;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Brush);
 
 /***/ }),
 /* 65 */

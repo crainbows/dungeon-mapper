@@ -1,49 +1,40 @@
-export default function (context, settings) {
-  console.log('creating brush');
+export default class Brush {
 
-  if (!context || !settings) {
-    throw new Error('Invalid args');
+  constructor(context, settings){
+    if (!context || !settings) {
+      throw new Error('Invalid args');
+    }
+    this.context = context;
+    this.settings = settings;
+    this.brushTypes = ["clear", "fog"];
+    this.currentBrushType = this.brushTypes[0];
   }
 
-  let brushTypes = ["clear", "fog"],
-    currentBrushType = brushTypes[0],
-    setBrushType = function () {
-      console.error("Doesn't exist yet");
-    },
-    toggle = function () {
-      if (currentBrushType === brushTypes[0]) {
-        console.log("shroud brush set");
-        currentBrushType = brushTypes[1];
-      } else if (currentBrushType === brushTypes[1]) {
+  // Future implementation
+  // setBrushType() {
+  //   console.error("Doesn't exist yet");
+  // }
 
-        console.log("clear brush set");
-        currentBrushType = brushTypes[0];
-      } else {
-        console.log("nothing: ");
-        console.log(currentBrushType);
-      }
-      context.strokeStyle = getCurrent();
-    },
-    getPattern = function (brushType) {
-      if (brushType === brushTypes[0]) {
-        context.globalCompositeOperation = 'destination-out';
-        return 'rgba(' + settings.fogRGB + ',' + settings.fogOpacity + ')';
-      } else if (brushType === brushTypes[1]) {
-        context.globalCompositeOperation = 'source-over';
-        return 'rgba(' + settings.fogRGB + ',' + settings.fogOpacity + ')';
-      }
-
-    },
-    getCurrent = function () {
-      return getPattern(currentBrushType);
+  toggle() {
+    if (this.currentBrushType === this.brushTypes[0]) {
+      this.currentBrushType = this.brushTypes[1];
+    } else if (this.currentBrushType === this.brushTypes[1]) {
+      this.currentBrushType = this.brushTypes[0];
     }
+    this.context.strokeStyle = this.getCurrent();
+  }
 
-  return {
-    brushTypes: brushTypes,
-    currentBrushType: currentBrushType,
-    setBrushType: setBrushType,
-    toggle: toggle,
-    getCurrent: getCurrent,
-    getPattern: getPattern
+  getPattern(brushType) {
+    if (brushType === this.brushTypes[0]) {
+      this.context.globalCompositeOperation = 'destination-out';
+      return 'rgba(' + this.settings.fogRGB + ',' + this.settings.fogOpacity + ')';
+    } else if (brushType === this.brushTypes[1]) {
+      this.context.globalCompositeOperation = 'source-over';
+      return 'rgba(' + this.settings.fogRGB + ',' + this.settings.fogOpacity + ')';
+    }
+  }
+
+  getCurrent() {
+    return this.getPattern(this.currentBrushType);
   }
 }

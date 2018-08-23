@@ -1,7 +1,7 @@
 import jquery from 'jquery';
 const $ = jquery;
 import config from './config';
-import brush from './brush';
+import Brush from './brush';
 let settings = config();
 let cursorContext;
 let cursorCanvas;
@@ -62,7 +62,7 @@ export function create(parentElem, opts) {
     fowContext = fowCanvas.getContext('2d');
     cursorContext = cursorCanvas.getContext('2d');
     copyCanvas(mapImageContext, createImageCanvas(mapImage));
-    fowBrush = brush(fowContext, opts);
+    fowBrush = new Brush(fowContext, opts);
     fowContext.strokeStyle = fowBrush.getCurrent();
     fogMap();
     createRender();
