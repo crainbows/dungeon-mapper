@@ -1,26 +1,37 @@
 @font-face {
-    font-family: "folkard";
-    src: url("/fonts/folkard.woff") format('woff');
+  font-family: "folkard";
+  src: url("/fonts/folkard.woff") format("woff");
 }
 
 /*@font-face {*/
+
 /*    font-family: "perigord";*/
+
 /*    src: url("/fonts/perigord.woff") format('woff');*/
+
 /*}*/
 
 /*@font-face {*/
-/*    font-family: "cardinal";*/
-/*    src: url("/fonts/cardinal.woff") format('woff');*/
-/*}*/
 
+/*    font-family: "cardinal";*/
+
+/*    src: url("/fonts/cardinal.woff") format('woff');*/
+
+/*}*/
 
 @font-face {
-    font-family: "KnightsTemplar";
-    src: url("/fonts/KnightsTemplar.woff") format('woff');
+  font-family: "KnightsTemplar";
+  src: url("/fonts/KnightsTemplar.woff") format("woff");
 }
 
-html, body, #wrapper {
-  width:  100%;
+/* TODO: Remove later */
+
+/* temporary ? */
+
+html,
+body,
+#wrapper {
+  width: 100%;
   height: 100%;
   margin: 0px;
 }
@@ -50,10 +61,9 @@ html, body, #wrapper {
   display: inline-block;
 }
 
-/* TODO: Remove later */
 #dmCanvas {
   opacity: 0.5;
-  margin-bottom: 50px; /* to leave room for the control panel */
+  margin-bottom: 50px;
 }
 
 .fow-canvas {
@@ -61,7 +71,7 @@ html, body, #wrapper {
 }
 
 .map-canvas {
-  margin-bottom: 50px; /* to leave room for the control panel */
+  margin-bottom: 50px;
   max-width: 100%;
 }
 
@@ -77,13 +87,13 @@ html, body, #wrapper {
   height: 100vh;
   width: 100vw;
   z-index: 100;
-  background-image: url('/images/DungeonEntranceMedium.jpg');
+  background-image: url("/images/DungeonEntranceMedium.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
 }
 
-.title-font{
+.title-font {
   font-family: folkard, palitino, serif;
 }
 
@@ -101,11 +111,6 @@ html, body, #wrapper {
   line-height: 40px;
 }
 
-.btn {
-  /*font-family: KnightsTemplar, palitino, serif;*/
-  /*font-size: 20px;*/
-}
-
 .auth-container {
   position: absolute;
   right: 10%;
@@ -118,29 +123,26 @@ html, body, #wrapper {
   top: calc(50% + 70px);
 }
 
-
 .map {
   position: absolute;
   top: 0;
   max-height: 100vh;
   -webkit-transition: opacity 2s ease-in-out;
-  -moz-transition: opacity 2s ease-in-out;
-  -o-transition: opacity 2s ease-in-out;
   transition: opacity 2s ease-in-out;
 }
 
 #map-container > img {
-  position: absolute!important;
-  top: 50%!important;
+  position: absolute !important;
+  top: 50% !important;
   left: 50%;
-  margin-right: -50%!important;
-  transform: translate(-50%, -50%);
+  margin-right: -50% !important;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .transparent {
-  opacity:0;
+  opacity: 0;
 }
-
 
 div#upload {
   height: 500px;
@@ -151,10 +153,9 @@ div#upload {
   font-family: perigord, palitino, serif;
   border: none;
   background-position: center;
-  background-color: transparent; /* temporary ? */
+  background-color: transparent;
 }
 
-/* temporary ? */
 .glass:hover {
   color: red;
   font-family: perigord, palitino, serif;
@@ -169,25 +170,30 @@ div#upload {
   font-size: 150%;
   text-transform: uppercase;
 }
+
 .glass::-moz-placeholder {
   color: black !important;
   font-family: KnightsTemplar, palitino, serif;
 }
+
 .glass:-moz-placeholder {
   color: black !important;
   font-family: KnightsTemplar, palitino, serif;
 }
+
 .glass:-ms-input-placeholder {
   color: black !important;
   font-family: KnightsTemplar, palitino, serif;
 }
+
 .glass::input-placeholder {
   color: black !important;
   font-family: perigord, palitino, serif;
 }
 
-@media (max-width:480px) {
+@media (max-width: 480px) {
   .title-text {
     font-size: 20vw;
   }
 }
+
