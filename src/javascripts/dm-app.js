@@ -1,6 +1,5 @@
 import jQuery from "jquery";
 const $ = jQuery;
-import config from './config';
 import dropzone from 'dropzone';
 import * as dmMap from './map';
 import axios from 'axios';
@@ -8,7 +7,6 @@ import axios from 'axios';
 //refactor this later
 var mapWrapper = document.getElementById('map-wrapper');
 dropzone.autoDiscover = false;
-var settings = config();
 
 new dropzone("div#upload", {
   url: '/upload',
@@ -23,7 +21,7 @@ new dropzone("div#upload", {
 });
 
 function checkForMapUpload() {
-  axios.get(settings.mapImage)
+  axios.get('/dm/map')
     .then(() => createTheMap())
     .catch(error => console.error(error));
 }

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 60);
+/******/ 	return __webpack_require__(__webpack_require__.s = 59);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(27);
+var bind = __webpack_require__(26);
 var isBuffer = __webpack_require__(67);
 
 /*global toString:true*/
@@ -10995,10 +10995,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(28);
+    adapter = __webpack_require__(27);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(28);
+    adapter = __webpack_require__(27);
   }
   return adapter;
 }
@@ -11089,25 +11089,6 @@ module.exports = defaults;
 /* 24 */,
 /* 25 */,
 /* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// Settings for client-side behavior in the app
-/* harmony default export */ __webpack_exports__["a"] = (function () {
-  var settings = {
-    maxWidth: 1400,
-    maxHeight: 8000,
-    fogOpacity: 1,
-    fogRGB: "0,0,0",
-    defaultLineWidth: 15,
-    defaultBrushShape: 'round',
-    mapImage: '/dm/map'
-  };
-  return settings;
-});
-
-/***/ }),
-/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11125,7 +11106,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11136,7 +11117,7 @@ var settle = __webpack_require__(70);
 var buildURL = __webpack_require__(72);
 var parseHeaders = __webpack_require__(73);
 var isURLSameOrigin = __webpack_require__(74);
-var createError = __webpack_require__(29);
+var createError = __webpack_require__(28);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(75);
 
 module.exports = function xhrAdapter(config) {
@@ -11312,7 +11293,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11337,7 +11318,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11349,7 +11330,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11375,6 +11356,7 @@ module.exports = Cancel;
 
 
 /***/ }),
+/* 31 */,
 /* 32 */,
 /* 33 */,
 /* 34 */,
@@ -11402,40 +11384,36 @@ module.exports = Cancel;
 /* 56 */,
 /* 57 */,
 /* 58 */,
-/* 59 */,
-/* 60 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(61);
+module.exports = __webpack_require__(60);
 
 
 /***/ }),
-/* 61 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dropzone__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dropzone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_dropzone__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__map__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dropzone__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dropzone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_dropzone__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__map__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
 
 var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
 
 
 
 
-
 //refactor this later
 var mapWrapper = document.getElementById('map-wrapper');
-__WEBPACK_IMPORTED_MODULE_2_dropzone___default.a.autoDiscover = false;
-var settings = Object(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */])();
+__WEBPACK_IMPORTED_MODULE_1_dropzone___default.a.autoDiscover = false;
 
-new __WEBPACK_IMPORTED_MODULE_2_dropzone___default.a("div#upload", {
+new __WEBPACK_IMPORTED_MODULE_1_dropzone___default.a("div#upload", {
   url: '/upload',
   dictDefaultMessage: 'Click here or drag and drop an image to upload',
   acceptedFiles: 'image/*',
@@ -11450,7 +11428,7 @@ new __WEBPACK_IMPORTED_MODULE_2_dropzone___default.a("div#upload", {
 });
 
 function checkForMapUpload() {
-  __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get(settings.mapImage).then(function () {
+  __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/dm/map').then(function () {
     return createTheMap();
   }).catch(function (error) {
     return console.error(error);
@@ -11461,11 +11439,11 @@ checkForMapUpload();
 
 function createTheMap() {
   $('#upload').hide();
-  __WEBPACK_IMPORTED_MODULE_3__map__["a" /* create */](mapWrapper, {
+  __WEBPACK_IMPORTED_MODULE_2__map__["a" /* create */](mapWrapper, {
     callback: function callback() {
-      __WEBPACK_IMPORTED_MODULE_3__map__["c" /* fitMapToWindow */]();
+      __WEBPACK_IMPORTED_MODULE_2__map__["c" /* fitMapToWindow */]();
       window.addEventListener('resize', function () {
-        return __WEBPACK_IMPORTED_MODULE_3__map__["c" /* fitMapToWindow */]();
+        return __WEBPACK_IMPORTED_MODULE_2__map__["c" /* fitMapToWindow */]();
       });
     },
     error: function error() {
@@ -11475,15 +11453,15 @@ function createTheMap() {
 }
 
 $('#btn-new-map').click(function () {
-  __WEBPACK_IMPORTED_MODULE_3__map__["d" /* remove */]();
+  __WEBPACK_IMPORTED_MODULE_2__map__["d" /* remove */]();
   $('#upload').show();
 });
 
 $('#btn-send').click(function () {
-  __WEBPACK_IMPORTED_MODULE_3__map__["b" /* createRender */]();
+  __WEBPACK_IMPORTED_MODULE_2__map__["b" /* createRender */]();
   var imageData = document.getElementById('render').src;
 
-  __WEBPACK_IMPORTED_MODULE_4_axios___default.a.post('/send', {
+  __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post('/send', {
     'imageData': imageData
   }).then(function (response) {
     if (response.data.success) {
@@ -11497,6 +11475,7 @@ $('#btn-send').click(function () {
 });
 
 /***/ }),
+/* 61 */,
 /* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15047,13 +15026,10 @@ function __guardMethod__(obj, methodName, transform) {
 /* harmony export (immutable) */ __webpack_exports__["b"] = createRender;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__brush__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__brush__ = __webpack_require__(64);
 
 var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
 
-
-var settings = Object(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */])();
 var cursorContext = void 0;
 var cursorCanvas = void 0;
 var fowContext = void 0;
@@ -15062,27 +15038,15 @@ var mapImageContext = void 0;
 var mapImageCanvas = void 0;
 var fowBrush = void 0;
 var mapImage = void 0;
-var width = void 0;
-var height = void 0;
+var width = 1400;
+var height = 8000;
 var isDrawing = false;
 var originalCords = void 0;
-var lineWidth = settings.defaultLineWidth;
-var brushShape = settings.defaultBrushShape;
-
-function extend(obj1, obj2) {
-  obj1 = obj1 || {};
-  obj2 = obj2 || {};
-  for (var attrname in obj2) {
-    obj1[attrname] = obj2[attrname];
-  }
-  return obj1;
-}
+var lineWidth = 15;
+var brushShape = 'round';
 
 function create(parentElem, opts) {
-  opts = extend(opts, settings);
-  console.log(opts);
-  var imgUrl = opts.imgUrl || opts.mapImage,
-      callback = opts.callback,
+  var callback = opts.callback,
       error = opts.error;
 
   mapImage = new Image();
@@ -15095,10 +15059,9 @@ function create(parentElem, opts) {
     console.log('mapImage loaded');
 
     // TODO: make this more readable
-    dimensions = getOptimalDimensions(mapImage.width, mapImage.height, opts.maxWidth, opts.maxHeight);
+    dimensions = getOptimalDimensions(mapImage.width, mapImage.height, width, height);
     width = dimensions.width;
     height = dimensions.height;
-    console.log('width: ' + width + ', height: ' + height);
     container = getContainer();
     canvases = createCanvases();
     parentElem.appendChild(container);
@@ -15112,7 +15075,7 @@ function create(parentElem, opts) {
     fowContext = fowCanvas.getContext('2d');
     cursorContext = cursorCanvas.getContext('2d');
     copyCanvas(mapImageContext, createImageCanvas(mapImage));
-    fowBrush = new __WEBPACK_IMPORTED_MODULE_2__brush__["a" /* default */](fowContext, opts);
+    fowBrush = new __WEBPACK_IMPORTED_MODULE_1__brush__["a" /* default */](fowContext, opts);
     fowContext.strokeStyle = fowBrush.getCurrent();
     fogMap();
     createRender();
@@ -15121,7 +15084,7 @@ function create(parentElem, opts) {
     callback();
   };
   mapImage.crossOrigin = 'Anonymous'; // to prevent tainted canvas errors
-  mapImage.src = imgUrl;
+  mapImage.src = '/dm/map';
 }
 
 // TODO: account for multiple containers
@@ -15205,8 +15168,6 @@ function mergeCanvas(bottomCanvas, topCanvas) {
 function createImageCanvas(img) {
   var imageCanvas = document.createElement('canvas');
   var imageContext = imageCanvas.getContext('2d');
-  var width = settings.maxWidth;
-  var height = settings.maxHeight;
   imageCanvas.width = width;
   imageCanvas.height = height;
   imageContext.drawImage(img, 0, 0, width, height);
@@ -15580,7 +15541,7 @@ module.exports = __webpack_require__(66);
 
 
 var utils = __webpack_require__(1);
-var bind = __webpack_require__(27);
+var bind = __webpack_require__(26);
 var Axios = __webpack_require__(68);
 var defaults = __webpack_require__(13);
 
@@ -15615,9 +15576,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(31);
+axios.Cancel = __webpack_require__(30);
 axios.CancelToken = __webpack_require__(82);
-axios.isCancel = __webpack_require__(30);
+axios.isCancel = __webpack_require__(29);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -15770,7 +15731,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(29);
+var createError = __webpack_require__(28);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -16203,7 +16164,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(79);
-var isCancel = __webpack_require__(30);
+var isCancel = __webpack_require__(29);
 var defaults = __webpack_require__(13);
 var isAbsoluteURL = __webpack_require__(80);
 var combineURLs = __webpack_require__(81);
@@ -16363,7 +16324,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(31);
+var Cancel = __webpack_require__(30);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.

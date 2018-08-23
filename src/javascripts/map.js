@@ -1,8 +1,6 @@
 import jquery from 'jquery';
 const $ = jquery;
-import config from './config';
 import Brush from './brush';
-let settings = config();
 let cursorContext;
 let cursorCanvas;
 let fowContext;
@@ -11,28 +9,15 @@ let mapImageContext;
 let mapImageCanvas;
 let fowBrush;
 let mapImage;
-let width;
-let height;
+let width = 1400;
+let height = 8000;
 let isDrawing = false;
 let originalCords;
-let lineWidth = settings.defaultLineWidth;
-let brushShape = settings.defaultBrushShape;
-
-function extend(obj1, obj2) {
-  obj1 = obj1 || {};
-  obj2 = obj2 || {};
-  for (let attrname in obj2) {
-    obj1[attrname] = obj2[attrname];
-  }
-  return obj1;
-}
-
+let lineWidth = 15;
+let brushShape = 'round';
 
 export function create(parentElem, opts) {
-  opts = extend(opts, settings);
-  console.log(opts);
-  let imgUrl = opts.imgUrl || opts.mapImage,
-    callback = opts.callback,
+  let callback = opts.callback,
     error = opts.error;
 
   mapImage = new Image();
@@ -45,10 +30,9 @@ export function create(parentElem, opts) {
     console.log('mapImage loaded');
 
     // TODO: make this more readable
-    dimensions = getOptimalDimensions(mapImage.width, mapImage.height, opts.maxWidth, opts.maxHeight);
+    dimensions = getOptimalDimensions(mapImage.width, mapImage.height, width, height);
     width = dimensions.width;
     height = dimensions.height;
-    console.log('width: ' + width + ', height: ' + height);
     container = getContainer();
     canvases = createCanvases();
     parentElem.appendChild(container);
@@ -71,7 +55,7 @@ export function create(parentElem, opts) {
     callback();
   };
   mapImage.crossOrigin = 'Anonymous'; // to prevent tainted canvas errors
-  mapImage.src = imgUrl;
+  mapImage.src = '/dm/map';
 }
 
 // TODO: account for multiple containers
@@ -155,8 +139,6 @@ function mergeCanvas(bottomCanvas, topCanvas) {
 function createImageCanvas(img) {
   let imageCanvas = document.createElement('canvas');
   let imageContext = imageCanvas.getContext('2d');
-  let width = settings.maxWidth;
-  let height = settings.maxHeight;
   imageCanvas.width = width;
   imageCanvas.height = height;
   imageContext.drawImage(img, 0, 0, width, height);
