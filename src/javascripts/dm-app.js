@@ -1,14 +1,12 @@
 import jQuery from "jquery";
-// window.jQuery = jQuery;
 const $ = jQuery;
 import config from './config';
 import dropzone from 'dropzone';
-import map from './map';
+import * as dmMap from './map';
 import axios from 'axios';
 
 //refactor this later
 var mapWrapper = document.getElementById('map-wrapper');
-var dmMap = map();
 dropzone.autoDiscover = false;
 var settings = config();
 

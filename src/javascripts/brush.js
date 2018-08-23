@@ -1,4 +1,3 @@
-// import config from './config';
 export default function (context, settings) {
   console.log('creating brush');
 
