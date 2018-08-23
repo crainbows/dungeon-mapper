@@ -1,11 +1,10 @@
 export default class Brush {
 
-  constructor(context, settings){
-    if (!context || !settings) {
+  constructor(context){
+    if (!context) {
       throw new Error('Invalid args');
     }
     this.context = context;
-    this.settings = settings;
     this.brushTypes = ["clear", "fog"];
     this.currentBrushType = this.brushTypes[0];
   }
@@ -27,10 +26,10 @@ export default class Brush {
   getPattern(brushType) {
     if (brushType === this.brushTypes[0]) {
       this.context.globalCompositeOperation = 'destination-out';
-      return 'rgba(' + this.settings.fogRGB + ',' + this.settings.fogOpacity + ')';
+      return 'rgba(0,0,0,1)';
     } else if (brushType === this.brushTypes[1]) {
       this.context.globalCompositeOperation = 'source-over';
-      return 'rgba(' + this.settings.fogRGB + ',' + this.settings.fogOpacity + ')';
+      return 'rgba(0,0,0,1)';
     }
   }
 

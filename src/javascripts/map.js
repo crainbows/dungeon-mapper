@@ -1,6 +1,7 @@
 import jquery from 'jquery';
 const $ = jquery;
 import Brush from './brush';
+import {createCanvases, mergeCanvas, getContainer,convertCanvasToImage,createImageCanvas, getOptimalDimensions} from './canvas';
 let cursorContext;
 let cursorCanvas;
 let fowContext;
@@ -16,83 +17,46 @@ let originalCords;
 let lineWidth = 15;
 let brushShape = 'round';
 
-export function create(parentElem, opts) {
-  let callback = opts.callback,
-    error = opts.error;
-
+export function create(parentElem) {
   mapImage = new Image();
-  mapImage.onerror = error;
+  mapImage.onerror = () => console.error('error creating map');
   mapImage.onload = function () {
-    let container,
-      canvases,
-      dimensions;
+    let container;
 
     console.log('mapImage loaded');
 
     // TODO: make this more readable
-    dimensions = getOptimalDimensions(mapImage.width, mapImage.height, width, height);
-    width = dimensions.width;
-    height = dimensions.height;
+    [width, height] = getOptimalDimensions(mapImage.width, mapImage.height, width, height);
+    console.log(width);
+    console.log(height);
     container = getContainer();
-    canvases = createCanvases();
     parentElem.appendChild(container);
-    mapImageCanvas = canvases.mapImageCanvas;
-    fowCanvas = canvases.fowCanvas;
-    cursorCanvas = canvases.cursorCanvas;
+
+    [mapImageCanvas, fowCanvas,cursorCanvas] = createCanvases(width, height);
+
     container.appendChild(mapImageCanvas);
     container.appendChild(fowCanvas);
     container.appendChild(cursorCanvas);
+
     mapImageContext = mapImageCanvas.getContext('2d');
     fowContext = fowCanvas.getContext('2d');
     cursorContext = cursorCanvas.getContext('2d');
-    copyCanvas(mapImageContext, createImageCanvas(mapImage));
-    fowBrush = new Brush(fowContext, opts);
+    mapImageContext.drawImage(createImageCanvas(mapImage, width, height), 0, 0, width, height);
+
+    fowBrush = new Brush(fowContext);
     fowContext.strokeStyle = fowBrush.getCurrent();
+
     fogMap();
     createRender();
     setUpDrawingEvents();
     setupCursorTracking();
-    callback();
+    fitMapToWindow();
+    window.addEventListener('resize', () => fitMapToWindow());
   };
   mapImage.crossOrigin = 'Anonymous'; // to prevent tainted canvas errors
   mapImage.src = '/dm/map';
 }
 
-// TODO: account for multiple containers
-function getContainer() {
-  let container = document.getElementById('canvasContainer') || document.createElement('div');
-
-  container.id = 'canvasContainer'; //TODO: wont work for multiple containers
-  container.style.position = 'relative';
-  container.style.top = '0';
-  container.style.left = '0';
-  container.style.margin = 'auto';
-  return container;
-}
-
-function createCanvases() {
-
-  function createCanvas(type, zIndex) {
-    let canvas = document.createElement('canvas');
-
-    console.log('creating canvas ' + type);
-    canvas.width = width;
-    canvas.height = height;
-    canvas.id = type + Math.floor(Math.random() * 100000);
-    canvas.className = type + ' map-canvas';
-    canvas.style.position = 'absolute';
-    canvas.style.left = '0';
-    canvas.style.top = '0';
-    canvas.style.zIndex = zIndex;
-    return canvas;
-  }
-
-  return {
-    mapImageCanvas: createCanvas('map-image-canvas', 1),
-    fowCanvas: createCanvas('fow-canvas', 2),
-    cursorCanvas: createCanvas('cursor-canvas', 3)
-  };
-}
 
 function getMouseCoordinates(e) {
   let viewportOffset = fowCanvas.getBoundingClientRect(),
@@ -105,45 +69,8 @@ function getMouseCoordinates(e) {
   };
 }
 
-function getOptimalDimensions(idealWidth, idealHeight, maxWidth, maxHeight) {
-  let ratio = Math.min(maxWidth / idealWidth, (maxHeight - 150) / idealHeight);
 
-  return {
-    ratio: ratio,
-    width: idealWidth * ratio,
-    height: idealHeight * ratio
-  };
-}
 
-function convertCanvasToImage(canvas) {
-  let image = new Image();
-  image.src = canvas.toDataURL('image/png');
-  return image;
-}
-
-function copyCanvas(context, canvasToCopy) {
-  context.drawImage(canvasToCopy, 0, 0, width, height);
-}
-
-function mergeCanvas(bottomCanvas, topCanvas) {
-  let mergedCanvas = document.createElement('canvas');
-  let mergedContext = mergedCanvas.getContext('2d');
-  mergedCanvas.width = width;
-  mergedCanvas.height = height;
-  copyCanvas(mergedContext, bottomCanvas);
-  copyCanvas(mergedContext, topCanvas);
-  return mergedCanvas;
-}
-
-// Creates a canvas from an image
-function createImageCanvas(img) {
-  let imageCanvas = document.createElement('canvas');
-  let imageContext = imageCanvas.getContext('2d');
-  imageCanvas.width = width;
-  imageCanvas.height = height;
-  imageContext.drawImage(img, 0, 0, width, height);
-  return imageCanvas;
-}
 
 function resetMap(context, brushType, brush) {
   context.save();
@@ -179,11 +106,11 @@ export function resize(displayWidth, displayHeight) {
 // Maybe having this here violates cohesion
 export function fitMapToWindow() {
   let newDims = getOptimalDimensions(mapImageCanvas.width, mapImageCanvas.height, $(window).width(), $(window).height());
-  resize(newDims.width, newDims.height);
+  resize(newDims[0], newDims[1]);
 }
 
 export function toImage() {
-  return convertCanvasToImage(mergeCanvas(mapImageCanvas, fowCanvas));
+  return convertCanvasToImage(mergeCanvas(mapImageCanvas, fowCanvas, width, height));
 }
 
 export function remove() {
@@ -354,7 +281,6 @@ function setUpDrawingEvents() {
   fowCanvas.draw = function (newCords) {
     if (!isDrawing) return;
     if (newCords == originalCords) return;
-    // For each point create a quadraticCurve btweeen each point
     if (brushShape == 'round') {
 
       // Start Path
@@ -458,7 +384,7 @@ function removeRender() {
 }
 
 function createPlayerMapImage(bottomCanvas, topCanvas) {
-  let mergedCanvas = mergeCanvas(bottomCanvas, topCanvas),
+  let mergedCanvas = mergeCanvas(bottomCanvas, topCanvas, width, height),
     mergedImage = convertCanvasToImage(mergedCanvas);
 
   mergedImage.id = 'render';

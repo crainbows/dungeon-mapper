@@ -30,15 +30,7 @@ checkForMapUpload();
 
 function createTheMap() {
   $('#upload').hide();
-  dmMap.create(mapWrapper, {
-    callback: function () {
-      dmMap.fitMapToWindow();
-      window.addEventListener('resize', () => dmMap.fitMapToWindow());
-    },
-    error: function () {
-      console.error('error creating map');
-    }
-  });
+  dmMap.create(mapWrapper);
 }
 
 $('#btn-new-map').click(function () {
