@@ -11444,12 +11444,7 @@ new __WEBPACK_IMPORTED_MODULE_2_dropzone___default.a("div#upload", {
   init: function init() {
     var _this = this;
 
-    this.on('addedfile', function () {
-      console.log('added file');
-    });
-
     this.on('complete', function (file) {
-      console.log('complete');
       _this.removeFile(file);
       checkForMapUpload();
     });
@@ -11458,10 +11453,9 @@ new __WEBPACK_IMPORTED_MODULE_2_dropzone___default.a("div#upload", {
 
 function checkForMapUpload() {
   __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get(settings.mapImage).then(function () {
-    console.log('success');
-    createTheMap();
+    return createTheMap();
   }).catch(function (error) {
-    console.log(error);
+    return console.error(error);
   });
 }
 
@@ -11473,7 +11467,7 @@ function createTheMap() {
     callback: function callback() {
       dmMap.fitMapToWindow();
       window.addEventListener('resize', function () {
-        dmMap.fitMapToWindow();
+        return dmMap.fitMapToWindow();
       });
     },
     error: function error() {
@@ -11500,7 +11494,7 @@ $('#btn-send').click(function () {
       console.error(response.data.responseText);
     }
   }).catch(function (error) {
-    console.error(error);
+    return console.error(error);
   });
 });
 
@@ -15136,9 +15130,6 @@ var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
     container.style.top = '0';
     container.style.left = '0';
     container.style.margin = 'auto';
-    //container.style.width = width + 'px';
-    //container.style.height = height + 'px';
-
     return container;
   }
 
@@ -15156,8 +15147,6 @@ var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
       canvas.style.left = '0';
       canvas.style.top = '0';
       canvas.style.zIndex = zIndex;
-      zIndex++;
-
       return canvas;
     }
 
@@ -15179,13 +15168,6 @@ var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
     };
   }
 
-  function midPointBtw(p1, p2) {
-    return {
-      x: p1.x + (p2.x - p1.x) / 2,
-      y: p1.y + (p2.y - p1.y) / 2
-    };
-  }
-
   function getOptimalDimensions(idealWidth, idealHeight, maxWidth, maxHeight) {
     var ratio = Math.min(maxWidth / idealWidth, (maxHeight - 150) / idealHeight);
 
@@ -15198,9 +15180,7 @@ var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
 
   function convertCanvasToImage(canvas) {
     var image = new Image();
-
     image.src = canvas.toDataURL('image/png');
-
     return image;
   }
 
@@ -15209,28 +15189,24 @@ var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
   }
 
   function mergeCanvas(bottomCanvas, topCanvas) {
-    var mergedCanvas = document.createElement('canvas'),
-        mergedContext = mergedCanvas.getContext('2d');
-
+    var mergedCanvas = document.createElement('canvas');
+    var mergedContext = mergedCanvas.getContext('2d');
     mergedCanvas.width = width;
     mergedCanvas.height = height;
     copyCanvas(mergedContext, bottomCanvas);
     copyCanvas(mergedContext, topCanvas);
-
     return mergedCanvas;
   }
 
   // Creates a canvas from an image
   function createImageCanvas(img) {
-    var imageCanvas = document.createElement('canvas'),
-        imageContext = imageCanvas.getContext('2d'),
-        width = settings.maxWidth,
-        height = settings.maxHeight;
-
+    var imageCanvas = document.createElement('canvas');
+    var imageContext = imageCanvas.getContext('2d');
+    var width = settings.maxWidth;
+    var height = settings.maxHeight;
     imageCanvas.width = width;
     imageCanvas.height = height;
     imageContext.drawImage(img, 0, 0, width, height);
-
     return imageCanvas;
   }
 
@@ -15276,7 +15252,6 @@ var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
   }
 
   function remove() {
-    // won't work in IE
     mapImageCanvas.remove();
     fowCanvas.remove();
     cursorCanvas.remove();
@@ -15300,7 +15275,6 @@ var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
       maskDimensions.startingAngle = 0;
       maskDimensions.endingAngle = Math.PI * 2;
     } else if (brushShape == 'square') {
-
       maskDimensions.centerX = maskDimensions.x - lineWidth / 2;
       maskDimensions.centerY = maskDimensions.y - lineWidth / 2;
       maskDimensions.height = lineWidth;
@@ -15421,7 +15395,6 @@ var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
     fowCanvas.draw = function (newCords) {
       if (!isDrawing) return;
       if (newCords == originalCords) return;
-
       // For each point create a quadraticCurve btweeen each point
       if (brushShape == 'round') {
 
@@ -15433,8 +15406,7 @@ var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
         fowContext.moveTo(newCords.x, newCords.y);
 
         // Coordinates
-        var midPoint = midPointBtw(originalCords, newCords);
-        fowContext.quadraticCurveTo(originalCords.x, originalCords.y, midPoint.x, midPoint.y);
+        fowContext.lineTo(originalCords.x, originalCords.y);
         fowContext.stroke();
         originalCords = newCords;
       } else if (brushShape == 'square') {

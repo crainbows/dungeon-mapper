@@ -84,9 +84,6 @@ export default function () {
     container.style.top = '0';
     container.style.left = '0';
     container.style.margin = 'auto';
-    //container.style.width = width + 'px';
-    //container.style.height = height + 'px';
-
     return container;
   }
 
@@ -104,8 +101,6 @@ export default function () {
       canvas.style.left = '0';
       canvas.style.top = '0';
       canvas.style.zIndex = zIndex;
-      zIndex++;
-
       return canvas;
     }
 
@@ -127,13 +122,6 @@ export default function () {
     };
   }
 
-  function midPointBtw(p1, p2) {
-    return {
-      x: p1.x + (p2.x - p1.x) / 2,
-      y: p1.y + (p2.y - p1.y) / 2
-    }
-  }
-
   function getOptimalDimensions(idealWidth, idealHeight, maxWidth, maxHeight) {
     let ratio = Math.min(maxWidth / idealWidth, (maxHeight - 150) / idealHeight);
 
@@ -146,9 +134,7 @@ export default function () {
 
   function convertCanvasToImage(canvas) {
     let image = new Image();
-
     image.src = canvas.toDataURL('image/png');
-
     return image;
   }
 
@@ -157,28 +143,24 @@ export default function () {
   }
 
   function mergeCanvas(bottomCanvas, topCanvas) {
-    let mergedCanvas = document.createElement('canvas'),
-      mergedContext = mergedCanvas.getContext('2d');
-
+    let mergedCanvas = document.createElement('canvas');
+    let mergedContext = mergedCanvas.getContext('2d');
     mergedCanvas.width = width;
     mergedCanvas.height = height;
     copyCanvas(mergedContext, bottomCanvas);
     copyCanvas(mergedContext, topCanvas);
-
     return mergedCanvas;
   }
 
   // Creates a canvas from an image
   function createImageCanvas(img) {
-    let imageCanvas = document.createElement('canvas'),
-      imageContext = imageCanvas.getContext('2d'),
-      width = settings.maxWidth,
-      height = settings.maxHeight;
-
+    let imageCanvas = document.createElement('canvas');
+    let imageContext = imageCanvas.getContext('2d');
+    let width = settings.maxWidth;
+    let height = settings.maxHeight;
     imageCanvas.width = width;
     imageCanvas.height = height;
     imageContext.drawImage(img, 0, 0, width, height);
-
     return imageCanvas;
   }
 
@@ -224,7 +206,6 @@ export default function () {
   }
 
   function remove() {
-    // won't work in IE
     mapImageCanvas.remove();
     fowCanvas.remove();
     cursorCanvas.remove();
@@ -248,7 +229,6 @@ export default function () {
       maskDimensions.startingAngle = 0;
       maskDimensions.endingAngle = Math.PI * 2
     } else if (brushShape == 'square') {
-
       maskDimensions.centerX = maskDimensions.x - lineWidth / 2;
       maskDimensions.centerY = maskDimensions.y - lineWidth / 2;
       maskDimensions.height = lineWidth;
@@ -393,7 +373,6 @@ export default function () {
     fowCanvas.draw = function (newCords) {
       if (!isDrawing) return;
       if (newCords == originalCords) return;
-
       // For each point create a quadraticCurve btweeen each point
       if (brushShape == 'round') {
 
@@ -405,8 +384,7 @@ export default function () {
         fowContext.moveTo(newCords.x, newCords.y);
 
         // Coordinates
-        let midPoint = midPointBtw(originalCords, newCords);
-        fowContext.quadraticCurveTo(originalCords.x, originalCords.y, midPoint.x, midPoint.y);
+        fowContext.lineTo(originalCords.x, originalCords.y);
         fowContext.stroke();
         originalCords = newCords;
       } else if (brushShape == 'square') {
