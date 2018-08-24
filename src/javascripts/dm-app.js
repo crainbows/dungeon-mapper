@@ -1,16 +1,12 @@
 import jQuery from "jquery";
-// window.jQuery = jQuery;
 const $ = jQuery;
-import config from './config';
 import dropzone from 'dropzone';
-import map from './map';
+import * as dmMap from './map';
 import axios from 'axios';
 
 //refactor this later
 var mapWrapper = document.getElementById('map-wrapper');
-var dmMap = map();
 dropzone.autoDiscover = false;
-var settings = config();
 
 new dropzone("div#upload", {
   url: '/upload',
@@ -25,7 +21,7 @@ new dropzone("div#upload", {
 });
 
 function checkForMapUpload() {
-  axios.get(settings.mapImage)
+  axios.get('/dm/map')
     .then(() => createTheMap())
     .catch(error => console.error(error));
 }
@@ -34,15 +30,7 @@ checkForMapUpload();
 
 function createTheMap() {
   $('#upload').hide();
-  dmMap.create(mapWrapper, {
-    callback: function () {
-      dmMap.fitMapToWindow();
-      window.addEventListener('resize', () => dmMap.fitMapToWindow());
-    },
-    error: function () {
-      console.error('error creating map');
-    }
-  });
+  dmMap.create(mapWrapper);
 }
 
 $('#btn-new-map').click(function () {
@@ -50,7 +38,7 @@ $('#btn-new-map').click(function () {
   $('#upload').show();
 });
 
-$('#btn-send').click(function () {
+$(mapWrapper).find('.btn-send').click(function () {
   dmMap.createRender();
   let imageData = document.getElementById('render').src;
 

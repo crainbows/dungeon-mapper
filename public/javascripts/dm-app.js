@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 60);
+/******/ 	return __webpack_require__(__webpack_require__.s = 59);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(27);
+var bind = __webpack_require__(26);
 var isBuffer = __webpack_require__(67);
 
 /*global toString:true*/
@@ -10995,10 +10995,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(28);
+    adapter = __webpack_require__(27);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(28);
+    adapter = __webpack_require__(27);
   }
   return adapter;
 }
@@ -11089,25 +11089,6 @@ module.exports = defaults;
 /* 24 */,
 /* 25 */,
 /* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// Settings for client-side behavior in the app
-/* harmony default export */ __webpack_exports__["a"] = (function () {
-  var settings = {
-    maxWidth: 1400,
-    maxHeight: 8000,
-    fogOpacity: 1,
-    fogRGB: "0,0,0",
-    defaultLineWidth: 15,
-    defaultBrushShape: 'round',
-    mapImage: '/dm/map'
-  };
-  return settings;
-});
-
-/***/ }),
-/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11125,7 +11106,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11136,7 +11117,7 @@ var settle = __webpack_require__(70);
 var buildURL = __webpack_require__(72);
 var parseHeaders = __webpack_require__(73);
 var isURLSameOrigin = __webpack_require__(74);
-var createError = __webpack_require__(29);
+var createError = __webpack_require__(28);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(75);
 
 module.exports = function xhrAdapter(config) {
@@ -11312,7 +11293,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11337,7 +11318,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11349,7 +11330,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11375,6 +11356,7 @@ module.exports = Cancel;
 
 
 /***/ }),
+/* 31 */,
 /* 32 */,
 /* 33 */,
 /* 34 */,
@@ -11402,42 +11384,36 @@ module.exports = Cancel;
 /* 56 */,
 /* 57 */,
 /* 58 */,
-/* 59 */,
-/* 60 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(61);
+module.exports = __webpack_require__(60);
 
 
 /***/ }),
-/* 61 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dropzone__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_dropzone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_dropzone__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__map__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dropzone__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_dropzone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_dropzone__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__map__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
 
-// window.jQuery = jQuery;
 var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
-
 
 
 
 
 //refactor this later
 var mapWrapper = document.getElementById('map-wrapper');
-var dmMap = Object(__WEBPACK_IMPORTED_MODULE_3__map__["a" /* default */])();
-__WEBPACK_IMPORTED_MODULE_2_dropzone___default.a.autoDiscover = false;
-var settings = Object(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */])();
+__WEBPACK_IMPORTED_MODULE_1_dropzone___default.a.autoDiscover = false;
 
-new __WEBPACK_IMPORTED_MODULE_2_dropzone___default.a("div#upload", {
+new __WEBPACK_IMPORTED_MODULE_1_dropzone___default.a("div#upload", {
   url: '/upload',
   dictDefaultMessage: 'Click here or drag and drop an image to upload',
   acceptedFiles: 'image/*',
@@ -11452,7 +11428,7 @@ new __WEBPACK_IMPORTED_MODULE_2_dropzone___default.a("div#upload", {
 });
 
 function checkForMapUpload() {
-  __WEBPACK_IMPORTED_MODULE_4_axios___default.a.get(settings.mapImage).then(function () {
+  __WEBPACK_IMPORTED_MODULE_3_axios___default.a.get('/dm/map').then(function () {
     return createTheMap();
   }).catch(function (error) {
     return console.error(error);
@@ -11463,29 +11439,19 @@ checkForMapUpload();
 
 function createTheMap() {
   $('#upload').hide();
-  dmMap.create(mapWrapper, {
-    callback: function callback() {
-      dmMap.fitMapToWindow();
-      window.addEventListener('resize', function () {
-        return dmMap.fitMapToWindow();
-      });
-    },
-    error: function error() {
-      console.error('error creating map');
-    }
-  });
+  __WEBPACK_IMPORTED_MODULE_2__map__["a" /* create */](mapWrapper);
 }
 
 $('#btn-new-map').click(function () {
-  dmMap.remove();
+  __WEBPACK_IMPORTED_MODULE_2__map__["c" /* remove */]();
   $('#upload').show();
 });
 
-$('#btn-send').click(function () {
-  dmMap.createRender();
+$(mapWrapper).find('.btn-send').click(function () {
+  __WEBPACK_IMPORTED_MODULE_2__map__["b" /* createRender */]();
   var imageData = document.getElementById('render').src;
 
-  __WEBPACK_IMPORTED_MODULE_4_axios___default.a.post('/send', {
+  __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post('/send', {
     'imageData': imageData
   }).then(function (response) {
     if (response.data.success) {
@@ -11499,7 +11465,7 @@ $('#btn-send').click(function () {
 });
 
 /***/ }),
-/* 62 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15037,536 +15003,629 @@ function __guardMethod__(obj, methodName, transform) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module)))
 
 /***/ }),
-/* 63 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return create; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return remove; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return createRender; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__brush__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__brush__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__canvas__ = __webpack_require__(64);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 
 var $ = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
 
 
-/* harmony default export */ __webpack_exports__["a"] = (function () {
-  var settings = Object(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */])();
-  var cursorContext = void 0,
-      cursorCanvas = void 0,
-      fowContext = void 0,
-      fowCanvas = void 0,
-      mapImageContext = void 0,
-      mapImageCanvas = void 0,
-      fowBrush = void 0,
-      mapImage = void 0,
-      width = void 0,
-      height = void 0,
-      isDrawing = false,
-      originalCords = void 0,
-      lineWidth = settings.defaultLineWidth,
-      brushShape = settings.defaultBrushShape;
 
-  function extend(obj1, obj2) {
-    obj1 = obj1 || {};
-    obj2 = obj2 || {};
-    for (var attrname in obj2) {
-      obj1[attrname] = obj2[attrname];
-    }
-    return obj1;
-  }
+var cursorContext = void 0;
+var cursorCanvas = void 0;
+var fowContext = void 0;
+var fowCanvas = void 0;
+var mapImageContext = void 0;
+var mapImageCanvas = void 0;
+var brush = void 0;
+var mapImage = void 0;
+var width = 1400;
+var height = 8000;
+var originalcoords = void 0;
 
-  function create(parentElem, opts) {
-    opts = extend(opts, settings);
+function create(parentElem) {
+  mapImage = new Image();
+  mapImage.onerror = function () {
+    return console.error('error creating map');
+  };
+  mapImage.onload = function () {
+    var container = void 0;
 
-    var imgUrl = opts.imgUrl || opts.mapImage,
-        callback = opts.callback,
-        error = opts.error;
+    // TODO: make this more readable
 
-    mapImage = new Image();
-    mapImage.onerror = error;
-    mapImage.onload = function () {
-      var container = void 0,
-          canvases = void 0,
-          dimensions = void 0;
+    var _canvas$getOptimalDim = __WEBPACK_IMPORTED_MODULE_2__canvas__["e" /* getOptimalDimensions */](mapImage.width, mapImage.height, width, height);
 
-      console.log('mapImage loaded');
+    var _canvas$getOptimalDim2 = _slicedToArray(_canvas$getOptimalDim, 2);
 
-      // TODO: make this more readable
-      dimensions = getOptimalDimensions(mapImage.width, mapImage.height, opts.maxWidth, opts.maxHeight);
-      width = dimensions.width;
-      height = dimensions.height;
-      console.log('width: ' + width + ', height: ' + height);
-      container = getContainer();
-      canvases = createCanvases();
-      parentElem.appendChild(container);
-      mapImageCanvas = canvases.mapImageCanvas;
-      fowCanvas = canvases.fowCanvas;
-      cursorCanvas = canvases.cursorCanvas;
-      container.appendChild(mapImageCanvas);
-      container.appendChild(fowCanvas);
-      container.appendChild(cursorCanvas);
-      mapImageContext = mapImageCanvas.getContext('2d');
-      fowContext = fowCanvas.getContext('2d');
-      cursorContext = cursorCanvas.getContext('2d');
-      copyCanvas(mapImageContext, createImageCanvas(mapImage));
-      fowBrush = Object(__WEBPACK_IMPORTED_MODULE_2__brush__["a" /* default */])(fowContext, opts);
-      fowContext.strokeStyle = fowBrush.getCurrent();
-      fogMap();
-      createRender();
-      setUpDrawingEvents();
-      setupCursorTracking();
-      callback();
-    };
-    mapImage.crossOrigin = 'Anonymous'; // to prevent tainted canvas errors
-    mapImage.src = imgUrl;
-  }
+    width = _canvas$getOptimalDim2[0];
+    height = _canvas$getOptimalDim2[1];
 
-  // TODO: account for multiple containers
-  function getContainer() {
-    var container = document.getElementById('canvasContainer') || document.createElement('div');
+    container = __WEBPACK_IMPORTED_MODULE_2__canvas__["d" /* getContainer */]();
+    parentElem.appendChild(container);
 
-    container.id = 'canvasContainer'; //TODO: wont work for multiple containers
-    container.style.position = 'relative';
-    container.style.top = '0';
-    container.style.left = '0';
-    container.style.margin = 'auto';
-    return container;
-  }
+    var _canvas$createCanvase = __WEBPACK_IMPORTED_MODULE_2__canvas__["b" /* createCanvases */](width, height);
 
-  function createCanvases() {
+    var _canvas$createCanvase2 = _slicedToArray(_canvas$createCanvase, 3);
 
-    function createCanvas(type, zIndex) {
-      var canvas = document.createElement('canvas');
+    mapImageCanvas = _canvas$createCanvase2[0];
+    fowCanvas = _canvas$createCanvase2[1];
+    cursorCanvas = _canvas$createCanvase2[2];
 
-      console.log('creating canvas ' + type);
-      canvas.width = width;
-      canvas.height = height;
-      canvas.id = type + Math.floor(Math.random() * 100000);
-      canvas.className = type + ' map-canvas';
-      canvas.style.position = 'absolute';
-      canvas.style.left = '0';
-      canvas.style.top = '0';
-      canvas.style.zIndex = zIndex;
-      return canvas;
-    }
 
-    return {
-      mapImageCanvas: createCanvas('map-image-canvas', 1),
-      fowCanvas: createCanvas('fow-canvas', 2),
-      cursorCanvas: createCanvas('cursor-canvas', 3)
-    };
-  }
+    container.appendChild(mapImageCanvas);
+    container.appendChild(fowCanvas);
+    container.appendChild(cursorCanvas);
 
-  function getMouseCoordinates(e) {
-    var viewportOffset = fowCanvas.getBoundingClientRect(),
-        borderTop = parseInt($(fowCanvas).css('border-top-width')),
-        borderLeft = parseInt($(fowCanvas).css('border-left-width'));
+    mapImageContext = mapImageCanvas.getContext('2d');
+    fowContext = fowCanvas.getContext('2d');
+    cursorContext = cursorCanvas.getContext('2d');
+    mapImageContext.drawImage(__WEBPACK_IMPORTED_MODULE_2__canvas__["c" /* createImageCanvas */](mapImage, width, height), 0, 0, width, height);
 
-    return {
-      x: (e.clientX - viewportOffset.left - borderLeft) / getMapDisplayRatio(),
-      y: (e.clientY - viewportOffset.top - borderTop) / getMapDisplayRatio()
-    };
-  }
+    brush = new __WEBPACK_IMPORTED_MODULE_1__brush__["a" /* default */](fowContext);
+    fowContext.strokeStyle = brush.getCurrent();
 
-  function getOptimalDimensions(idealWidth, idealHeight, maxWidth, maxHeight) {
-    var ratio = Math.min(maxWidth / idealWidth, (maxHeight - 150) / idealHeight);
-
-    return {
-      ratio: ratio,
-      width: idealWidth * ratio,
-      height: idealHeight * ratio
-    };
-  }
-
-  function convertCanvasToImage(canvas) {
-    var image = new Image();
-    image.src = canvas.toDataURL('image/png');
-    return image;
-  }
-
-  function copyCanvas(context, canvasToCopy) {
-    context.drawImage(canvasToCopy, 0, 0, width, height);
-  }
-
-  function mergeCanvas(bottomCanvas, topCanvas) {
-    var mergedCanvas = document.createElement('canvas');
-    var mergedContext = mergedCanvas.getContext('2d');
-    mergedCanvas.width = width;
-    mergedCanvas.height = height;
-    copyCanvas(mergedContext, bottomCanvas);
-    copyCanvas(mergedContext, topCanvas);
-    return mergedCanvas;
-  }
-
-  // Creates a canvas from an image
-  function createImageCanvas(img) {
-    var imageCanvas = document.createElement('canvas');
-    var imageContext = imageCanvas.getContext('2d');
-    var width = settings.maxWidth;
-    var height = settings.maxHeight;
-    imageCanvas.width = width;
-    imageCanvas.height = height;
-    imageContext.drawImage(img, 0, 0, width, height);
-    return imageCanvas;
-  }
-
-  function resetMap(context, brushType, brush) {
-    context.save();
-    context.fillStyle = brush.getPattern(brushType);
-    context.fillRect(0, 0, width, height);
-    context.restore();
-  }
-
-  function fogMap() {
-    resetMap(fowContext, 'fog', fowBrush);
-  }
-
-  function clearMap() {
-    resetMap(fowContext, 'clear', fowBrush);
-  }
-
-  function resize(displayWidth, displayHeight) {
-    fowCanvas.style.width = displayWidth + 'px';
-    fowCanvas.style.height = displayHeight + 'px';
-    mapImageCanvas.style.width = displayWidth + 'px';
-    mapImageCanvas.style.height = displayHeight + 'px';
-    cursorCanvas.style.width = displayWidth + 'px';
-    cursorCanvas.style.height = displayHeight + 'px';
-
-    if ($(window).width() > displayWidth) {
-      var offset = ($(window).width() - displayWidth) / 2;
-      fowCanvas.style.left = offset + 'px';
-      mapImageCanvas.style.left = offset + 'px';
-      cursorCanvas.style.left = offset + 'px';
-    }
-  }
-
-  // Maybe having this here violates cohesion
-  function fitMapToWindow() {
-    var newDims = getOptimalDimensions(mapImageCanvas.width, mapImageCanvas.height, $(window).width(), $(window).height());
-    resize(newDims.width, newDims.height);
-  }
-
-  function toImage() {
-    return convertCanvasToImage(mergeCanvas(mapImageCanvas, fowCanvas));
-  }
-
-  function remove() {
-    mapImageCanvas.remove();
-    fowCanvas.remove();
-    cursorCanvas.remove();
-  }
-
-  function getMapDisplayRatio() {
-    return parseFloat(mapImageCanvas.style.width, 10) / mapImageCanvas.width;
-  }
-
-  function constructMask(cords) {
-    var maskDimensions = {
-      x: cords.x,
-      y: cords.y,
-      lineWidth: 2,
-      line: 'aqua',
-      fill: 'transparent'
-    };
-
-    if (brushShape == 'round') {
-      maskDimensions.r = lineWidth / 2;
-      maskDimensions.startingAngle = 0;
-      maskDimensions.endingAngle = Math.PI * 2;
-    } else if (brushShape == 'square') {
-      maskDimensions.centerX = maskDimensions.x - lineWidth / 2;
-      maskDimensions.centerY = maskDimensions.y - lineWidth / 2;
-      maskDimensions.height = lineWidth;
-      maskDimensions.width = lineWidth;
-    } else {
-      throw new Error('brush shape not found');
-    }
-
-    return maskDimensions;
-  }
-
-  function findOptimalRhombus(pointCurrent, pointPrevious) {
-    var rhombusCoords = [{
-      x: 0,
-      y: 0
-    }, {
-      x: 0,
-      y: 0
-    }, {
-      x: 0,
-      y: 0
-    }, {
-      x: 0,
-      y: 0
-    }];
-    if (pointCurrent.x < pointPrevious.x && pointCurrent.y > pointPrevious.y || pointCurrent.x > pointPrevious.x && pointCurrent.y < pointPrevious.y) {
-      // Moving NE or SW /
-      rhombusCoords[0].x = pointCurrent.x + lineWidth / 2;
-      rhombusCoords[0].y = pointCurrent.y + lineWidth / 2;
-      rhombusCoords[1].x = pointPrevious.x + lineWidth / 2;
-      rhombusCoords[1].y = pointPrevious.y + lineWidth / 2;
-      rhombusCoords[2].x = pointPrevious.x - lineWidth / 2;
-      rhombusCoords[2].y = pointPrevious.y - lineWidth / 2;
-      rhombusCoords[3].x = pointCurrent.x - lineWidth / 2;
-      rhombusCoords[3].y = pointCurrent.y - lineWidth / 2;
-      return rhombusCoords;
-    } else if (pointCurrent.x > pointPrevious.x && pointCurrent.y > pointPrevious.y || pointCurrent.x < pointPrevious.x && pointCurrent.y < pointPrevious.y) {
-      // Moving NW or SE \
-      rhombusCoords[0].x = pointCurrent.x - lineWidth / 2;
-      rhombusCoords[0].y = pointCurrent.y + lineWidth / 2;
-      rhombusCoords[1].x = pointPrevious.x - lineWidth / 2;
-      rhombusCoords[1].y = pointPrevious.y + lineWidth / 2;
-      rhombusCoords[2].x = pointPrevious.x + lineWidth / 2;
-      rhombusCoords[2].y = pointPrevious.y - lineWidth / 2;
-      rhombusCoords[3].x = pointCurrent.x + lineWidth / 2;
-      rhombusCoords[3].y = pointCurrent.y - lineWidth / 2;
-      return rhombusCoords;
-    }
-  }
-
-  function setupCursorTracking() {
-
-    // Mouse Click
-    cursorCanvas.onmousedown = function (e) {
-      // Start drawing
-      isDrawing = true;
-
-      // Get correct cords from mouse click
-      var cords = getMouseCoordinates(e);
-
-      // Draw initial Shape
-      // set lineWidth to 0 for initial drawing of shape to prevent screwing up of size/placement
-      fowCanvas.drawInitial(cords);
-    };
-
-    // Mouse Move
-    cursorCanvas.onmousemove = function (e) {
-      //get cords and points
-      var newCords = getMouseCoordinates(e);
-      if (isDrawing) {
-        fowCanvas.draw(newCords);
-      }
-      // Draw cursor and fow
-      cursorCanvas.drawCursor(newCords);
-    };
-
-    cursorCanvas.drawCursor = function (cords) {
-      // Cleanup
-      cursorContext.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
-
-      // Construct circle dimensions
-      var cursorMask = constructMask(cords);
-
-      cursorContext.strokeStyle = cursorMask.line;
-      cursorContext.fillStyle = cursorMask.fill;
-      cursorContext.lineWidth = cursorMask.lineWidth;
-
-      cursorContext.beginPath();
-      if (brushShape == 'round') {
-        cursorContext.arc(cursorMask.x, cursorMask.y, cursorMask.r, cursorMask.startingAngle, cursorMask.endingAngle, true);
-      } else if (brushShape == 'square') {
-        cursorContext.rect(cursorMask.centerX, cursorMask.centerY, cursorMask.height, cursorMask.width);
-      }
-
-      cursorContext.fill();
-      cursorContext.stroke();
-    };
-  }
-
-  function setUpDrawingEvents() {
-    fowCanvas.drawInitial = function (coords) {
-      originalCords = coords;
-      // Construct mask dimensions
-      var fowMask = constructMask(coords);
-      fowContext.lineWidth = fowMask.lineWidth;
-
-      fowContext.beginPath();
-      if (brushShape == 'round') {
-        fowContext.arc(fowMask.x, fowMask.y, fowMask.r, fowMask.startingAngle, fowMask.endingAngle, true);
-      } else if (brushShape == 'square') {
-        fowContext.rect(fowMask.centerX, fowMask.centerY, fowMask.height, fowMask.width);
-      }
-
-      fowContext.fill();
-      fowContext.stroke();
-    };
-
-    fowCanvas.draw = function (newCords) {
-      if (!isDrawing) return;
-      if (newCords == originalCords) return;
-      // For each point create a quadraticCurve btweeen each point
-      if (brushShape == 'round') {
-
-        // Start Path
-        fowContext.lineWidth = lineWidth;
-        fowContext.lineJoin = fowContext.lineCap = 'round';
-        fowContext.beginPath();
-
-        fowContext.moveTo(newCords.x, newCords.y);
-
-        // Coordinates
-        fowContext.lineTo(originalCords.x, originalCords.y);
-        fowContext.stroke();
-        originalCords = newCords;
-      } else if (brushShape == 'square') {
-
-        fowContext.lineWidth = 1;
-        fowContext.beginPath();
-
-        // draw rectangle at current point
-        var fowMask = constructMask(newCords);
-        fowContext.fillRect(fowMask.centerX, fowMask.centerY, fowMask.height, fowMask.width);
-
-        // optimal polygon to draw to connect two square
-        var optimalPoints = findOptimalRhombus(newCords, originalCords);
-        if (optimalPoints) {
-          fowContext.moveTo(optimalPoints[0].x, optimalPoints[0].y);
-          fowContext.lineTo(optimalPoints[1].x, optimalPoints[1].y);
-          fowContext.lineTo(optimalPoints[2].x, optimalPoints[2].y);
-          fowContext.lineTo(optimalPoints[3].x, optimalPoints[3].y);
-          fowContext.fill();
-        }
-        originalCords = newCords;
-      }
-    };
-
-    //TODO: move all of this jquery stuff somewhere else
-
-    $('#btn-toggle-brush').click(function () {
-      var toggleButton = this;
-      if (toggleButton.innerHTML === 'Clear Brush') {
-        toggleButton.innerHTML = 'Shadow Brush';
-      } else {
-        toggleButton.innerHTML = 'Clear Brush';
-      }
-      fowBrush.toggle();
+    fogMap();
+    createRender();
+    setUpDrawingEvents();
+    createDMToolbar(parentElem);
+    setupCursorTracking();
+    fitMapToWindow();
+    window.addEventListener('resize', function () {
+      return fitMapToWindow();
     });
+  };
+  mapImage.crossOrigin = 'Anonymous'; // to prevent tainted canvas errors
+  mapImage.src = '/dm/map';
+}
 
-    $('#btn-shroud-all').click(function () {
-      fogMap();
-      createRender();
-    });
-
-    $('#btn-clear-all').click(function () {
-      clearMap();
-      createRender();
-    });
-
-    $('#btn-enlarge-brush').click(function () {
-      // If the new width would be over 200, set it to 200
-      lineWidth = lineWidth * 2 > 200 ? 200 : lineWidth * 2;
-    });
-
-    $('#btn-shrink-brush').click(function () {
-      // If the new width would be less than 1, set it to 1
-      lineWidth = lineWidth / 2 < 1 ? 1 : lineWidth / 2;
-    });
-
-    $('#btn-shape-brush').click(function () {
-      var toggleButton = this;
-      if (toggleButton.innerHTML === 'Square Brush') {
-        toggleButton.innerHTML = 'Circle Brush';
-        brushShape = 'square';
-      } else {
-        toggleButton.innerHTML = 'Square Brush';
-        brushShape = 'round';
-      }
-    });
-
-    $('#btn-render').click(function () {
-      createRender();
-    });
-
-    document.addEventListener('mouseup', function () {
-      isDrawing = false;
-    });
-  }
-
-  //todo: move this functionality elsewher
-  function createRender() {
-    removeRender();
-    createPlayerMapImage(mapImageCanvas, fowCanvas);
-  }
-
-  function removeRender() {
-    $('#render').remove();
-  }
-
-  function createPlayerMapImage(bottomCanvas, topCanvas) {
-    var mergedCanvas = mergeCanvas(bottomCanvas, topCanvas),
-        mergedImage = convertCanvasToImage(mergedCanvas);
-
-    mergedImage.id = 'render';
-
-    //todo: refactor this functionality outside
-    document.querySelector('#map-wrapper').appendChild(mergedImage);
-  }
+function getMouseCoordinates(e) {
+  var viewportOffset = fowCanvas.getBoundingClientRect(),
+      borderTop = parseInt($(fowCanvas).css('border-top-width')),
+      borderLeft = parseInt($(fowCanvas).css('border-left-width'));
 
   return {
-    create: create,
-    createRender: createRender,
-    toImage: toImage,
-    resize: resize,
-    remove: remove,
-    fitMapToWindow: fitMapToWindow
+    x: (e.clientX - viewportOffset.left - borderLeft) / getMapDisplayRatio(),
+    y: (e.clientY - viewportOffset.top - borderTop) / getMapDisplayRatio()
   };
-});
+}
+
+function resetMap(context, brushType, brush) {
+  context.save();
+  context.fillStyle = brush.getPattern(brushType);
+  context.fillRect(0, 0, width, height);
+  context.restore();
+}
+
+function fogMap() {
+  resetMap(fowContext, 'fog', brush);
+}
+
+function clearMap() {
+  resetMap(fowContext, 'clear', brush);
+}
+
+function resize(displayWidth, displayHeight) {
+  fowCanvas.style.width = displayWidth + 'px';
+  fowCanvas.style.height = displayHeight + 'px';
+  mapImageCanvas.style.width = displayWidth + 'px';
+  mapImageCanvas.style.height = displayHeight + 'px';
+  cursorCanvas.style.width = displayWidth + 'px';
+  cursorCanvas.style.height = displayHeight + 'px';
+
+  if ($(window).width() > displayWidth) {
+    var offset = ($(window).width() - displayWidth) / 2;
+    fowCanvas.style.left = offset + 'px';
+    mapImageCanvas.style.left = offset + 'px';
+    cursorCanvas.style.left = offset + 'px';
+  }
+}
+
+// Maybe having this here violates cohesion
+function fitMapToWindow() {
+  var newDims = __WEBPACK_IMPORTED_MODULE_2__canvas__["e" /* getOptimalDimensions */](mapImageCanvas.width, mapImageCanvas.height, $(window).width(), $(window).height());
+  resize(newDims[0], newDims[1]);
+}
+
+function remove() {
+  mapImageCanvas.remove();
+  fowCanvas.remove();
+  cursorCanvas.remove();
+}
+
+function getMapDisplayRatio() {
+  return parseFloat(mapImageCanvas.style.width, 10) / mapImageCanvas.width;
+}
+
+function findOptimalRhombus(pointCurrent, pointPrevious) {
+  var rhombusCoords = [{
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }, {
+    x: 0,
+    y: 0
+  }];
+  if (pointCurrent.x < pointPrevious.x && pointCurrent.y > pointPrevious.y || pointCurrent.x > pointPrevious.x && pointCurrent.y < pointPrevious.y) {
+    // Moving NE or SW /
+    rhombusCoords[0].x = pointCurrent.x + brush.lineWidth / 2;
+    rhombusCoords[0].y = pointCurrent.y + brush.lineWidth / 2;
+    rhombusCoords[1].x = pointPrevious.x + brush.lineWidth / 2;
+    rhombusCoords[1].y = pointPrevious.y + brush.lineWidth / 2;
+    rhombusCoords[2].x = pointPrevious.x - brush.lineWidth / 2;
+    rhombusCoords[2].y = pointPrevious.y - brush.lineWidth / 2;
+    rhombusCoords[3].x = pointCurrent.x - brush.lineWidth / 2;
+    rhombusCoords[3].y = pointCurrent.y - brush.lineWidth / 2;
+    return rhombusCoords;
+  } else if (pointCurrent.x > pointPrevious.x && pointCurrent.y > pointPrevious.y || pointCurrent.x < pointPrevious.x && pointCurrent.y < pointPrevious.y) {
+    // Moving NW or SE \
+    rhombusCoords[0].x = pointCurrent.x - brush.lineWidth / 2;
+    rhombusCoords[0].y = pointCurrent.y + brush.lineWidth / 2;
+    rhombusCoords[1].x = pointPrevious.x - brush.lineWidth / 2;
+    rhombusCoords[1].y = pointPrevious.y + brush.lineWidth / 2;
+    rhombusCoords[2].x = pointPrevious.x + brush.lineWidth / 2;
+    rhombusCoords[2].y = pointPrevious.y - brush.lineWidth / 2;
+    rhombusCoords[3].x = pointCurrent.x + brush.lineWidth / 2;
+    rhombusCoords[3].y = pointCurrent.y - brush.lineWidth / 2;
+    return rhombusCoords;
+  }
+}
+
+function setupCursorTracking() {
+
+  // Mouse Click
+  cursorCanvas.onmousedown = function (e) {
+    // Start drawing
+    brush.isDrawing = true;
+
+    // Get correct coords from mouse click
+    var coords = getMouseCoordinates(e);
+
+    // Draw initial Shape
+    // set lineWidth to 0 for initial drawing of shape to prevent screwing up of size/placement
+    fowCanvas.drawInitial(coords);
+  };
+
+  // Mouse Move
+  cursorCanvas.onmousemove = function (e) {
+    //get coords and points
+    var newcoords = getMouseCoordinates(e);
+    if (brush.isDrawing) {
+      fowCanvas.draw(newcoords);
+    }
+    // Draw cursor and fow
+    cursorCanvas.drawCursor(newcoords);
+  };
+
+  cursorCanvas.drawCursor = function (coords) {
+    // Cleanup
+    cursorContext.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+
+    // Construct circle dimensions
+    var cursorMask = brush.getMask(coords);
+
+    cursorContext.strokeStyle = cursorMask.line;
+    cursorContext.fillStyle = cursorMask.fill;
+    cursorContext.lineWidth = cursorMask.lineWidth;
+
+    cursorContext.beginPath();
+    if (brush.shape == 'round') {
+      cursorContext.arc(cursorMask.x, cursorMask.y, cursorMask.r, cursorMask.startingAngle, cursorMask.endingAngle, true);
+    } else if (brush.shape == 'square') {
+      cursorContext.rect(cursorMask.centerX, cursorMask.centerY, cursorMask.height, cursorMask.width);
+    }
+
+    cursorContext.fill();
+    cursorContext.stroke();
+  };
+}
+
+function setUpDrawingEvents() {
+  fowCanvas.drawInitial = function (coords) {
+    originalcoords = coords;
+    // Construct mask dimensions
+    var fowMask = brush.getMask(coords);
+    fowContext.lineWidth = fowMask.lineWidth;
+
+    fowContext.beginPath();
+    if (brush.shape == 'round') {
+      fowContext.arc(fowMask.x, fowMask.y, fowMask.r, fowMask.startingAngle, fowMask.endingAngle, true);
+    } else if (brush.shape == 'square') {
+      fowContext.rect(fowMask.centerX, fowMask.centerY, fowMask.height, fowMask.width);
+    }
+
+    fowContext.fill();
+    fowContext.stroke();
+  };
+
+  fowCanvas.draw = function (newcoords) {
+    if (!brush.isDrawing) return;
+    if (newcoords == originalcoords) return;
+    if (brush.shape == 'round') {
+
+      // Start Path
+      fowContext.lineWidth = brush.lineWidth;
+      fowContext.lineJoin = fowContext.lineCap = 'round';
+      fowContext.beginPath();
+
+      fowContext.moveTo(newcoords.x, newcoords.y);
+
+      // Coordinates
+      fowContext.lineTo(originalcoords.x, originalcoords.y);
+      fowContext.stroke();
+      originalcoords = newcoords;
+    } else if (brush.shape == 'square') {
+
+      fowContext.lineWidth = 1;
+      fowContext.beginPath();
+
+      // draw rectangle at current point
+      var fowMask = brush.getMask(newcoords);
+      fowContext.fillRect(fowMask.centerX, fowMask.centerY, fowMask.height, fowMask.width);
+
+      // optimal polygon to draw to connect two square
+      var optimalPoints = findOptimalRhombus(newcoords, originalcoords);
+      if (optimalPoints) {
+        fowContext.moveTo(optimalPoints[0].x, optimalPoints[0].y);
+        fowContext.lineTo(optimalPoints[1].x, optimalPoints[1].y);
+        fowContext.lineTo(optimalPoints[2].x, optimalPoints[2].y);
+        fowContext.lineTo(optimalPoints[3].x, optimalPoints[3].y);
+        fowContext.fill();
+      }
+      originalcoords = newcoords;
+    }
+  };
+
+  //TODO: move all of this jquery stuff somewhere else
+
+
+  document.addEventListener('mouseup', function () {
+    brush.isDrawing = false;
+  });
+}
+
+function createDMToolbar(parentElem) {
+  $(parentElem).find('.btn-shroud-all').click(function () {
+    fogMap();
+    createRender();
+  });
+
+  $(parentElem).find('.btn-clear-all').click(function () {
+    clearMap();
+    createRender();
+  });
+
+  $(parentElem).find('.btn-toggle-brush').click(function () {
+    if (this.innerHTML === 'Clear Brush') {
+      this.innerHTML = 'Shadow Brush';
+    } else {
+      this.innerHTML = 'Clear Brush';
+    }
+    brush.toggle();
+  });
+
+  $(parentElem).find('.btn-shrink-brush').click(function () {
+    brush.shrink();
+  });
+
+  $(parentElem).find('.btn-enlarge-brush').click(function () {
+    brush.enlarge();
+  });
+
+  $(parentElem).find('.btn-shape-brush').click(function () {
+    if (this.innerHTML === 'Square Brush') {
+      this.innerHTML = 'Circle Brush';
+      brush.shape = 'square';
+    } else {
+      this.innerHTML = 'Square Brush';
+      brush.shape = 'round';
+    }
+  });
+}
+
+//todo: move this functionality elsewhere
+function createRender() {
+  removeRender();
+  createPlayerMapImage(mapImageCanvas, fowCanvas);
+}
+
+function removeRender() {
+  $('#render').remove();
+}
+
+function createPlayerMapImage(bottomCanvas, topCanvas) {
+  var mergedCanvas = __WEBPACK_IMPORTED_MODULE_2__canvas__["f" /* mergeCanvas */](bottomCanvas, topCanvas, width, height),
+      mergedImage = __WEBPACK_IMPORTED_MODULE_2__canvas__["a" /* convertCanvasToImage */](mergedCanvas);
+
+  mergedImage.id = 'render';
+
+  //todo: refactor this functionality outside
+  document.querySelector('#map-wrapper').appendChild(mergedImage);
+}
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ *
+ *
+ * @export
+ * @class Brush
+ */
+var Brush = function () {
+
+  /**
+   * Creates an instance of Brush.
+   * @param {HTMLCanvasElement} context Canvas element to create the brush under.
+   * @memberof Brush
+   */
+  function Brush(context) {
+    _classCallCheck(this, Brush);
+
+    if (!context) {
+      throw new Error('Invalid args');
+    }
+    this.context = context;
+    this.modes = ["clear", "fog"];
+    this.currentMode = this.modes[0];
+    this.lineWidth = 15;
+    this.shape = 'round';
+    this.isDrawing = false;
+  }
+
+  // Future implementation
+  // setBrushType() {
+  //   console.error("Doesn't exist yet");
+  // }
+
+  /**
+   * Toggle the mode of the brush between clear and fog
+   *
+   * @memberof Brush
+   */
+
+
+  _createClass(Brush, [{
+    key: "toggle",
+    value: function toggle() {
+      if (this.currentMode === this.modes[0]) {
+        this.currentMode = this.modes[1];
+      } else if (this.currentMode === this.modes[1]) {
+        this.currentMode = this.modes[0];
+      }
+      this.context.strokeStyle = this.getCurrent();
+    }
+
+    /**
+     *
+     *
+     * @param {string} brushMode clear or fog
+     * @returns {string} colour of the fog - rgba(0,0,0,1) 
+     * @memberof Brush
+     */
+
+  }, {
+    key: "getPattern",
+    value: function getPattern(brushMode) {
+      if (brushMode === this.modes[0]) {
+        this.context.globalCompositeOperation = 'destination-out';
+        return 'rgba(0,0,0,1)';
+      } else if (brushMode === this.modes[1]) {
+        this.context.globalCompositeOperation = 'source-over';
+        return 'rgba(0,0,0,1)';
+      }
+    }
+  }, {
+    key: "getCurrent",
+    value: function getCurrent() {
+      return this.getPattern(this.currentMode);
+    }
+
+    /**
+     *
+     *
+     * @param {object} coords
+     * @param {number} coords.x - X coordinate.
+     * @param {number} coords.y - Y coordinate.
+     * @returns {object} Dimentions of current brush depending on shape.
+     * @memberof Brush
+     */
+
+  }, {
+    key: "getMask",
+    value: function getMask(coords) {
+      var maskDimensions = {
+        x: coords.x,
+        y: coords.y,
+        lineWidth: 2,
+        line: 'aqua',
+        fill: 'transparent'
+      };
+
+      if (this.shape == 'round') {
+        maskDimensions.r = this.lineWidth / 2;
+        maskDimensions.startingAngle = 0;
+        maskDimensions.endingAngle = Math.PI * 2;
+      } else if (this.shape == 'square') {
+        maskDimensions.centerX = maskDimensions.x - this.lineWidth / 2;
+        maskDimensions.centerY = maskDimensions.y - this.lineWidth / 2;
+        maskDimensions.height = this.lineWidth;
+        maskDimensions.width = this.lineWidth;
+      } else {
+        throw new Error('brush shape not found');
+      }
+      return maskDimensions;
+    }
+  }, {
+    key: "shrink",
+    value: function shrink() {
+      // If the new width would be over 200, set it to 200
+      this.lineWidth = this.lineWidth / 2 < 1 ? 1 : this.lineWidth / 2;
+    }
+  }, {
+    key: "enlarge",
+    value: function enlarge() {
+      // If the new width would be less than 1, set it to 1
+      this.lineWidth = this.lineWidth * 2 > 200 ? 200 : this.lineWidth * 2;
+    }
+  }]);
+
+  return Brush;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Brush);
 
 /***/ }),
 /* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// import config from './config';
-/* harmony default export */ __webpack_exports__["a"] = (function (context, settings) {
-  console.log('creating brush');
+/* harmony export (immutable) */ __webpack_exports__["e"] = getOptimalDimensions;
+/* harmony export (immutable) */ __webpack_exports__["b"] = createCanvases;
+/* harmony export (immutable) */ __webpack_exports__["f"] = mergeCanvas;
+/* harmony export (immutable) */ __webpack_exports__["d"] = getContainer;
+/* harmony export (immutable) */ __webpack_exports__["a"] = convertCanvasToImage;
+/* harmony export (immutable) */ __webpack_exports__["c"] = createImageCanvas;
+/**
+ * Returns maximum dimentions for an image without distorting the aspect ratio.
+ * 
+ * @param {number} idealWidth
+ * @param {number} idealHeight
+ * @param {number} maxWidth
+ * @param {number} maxHeight
+ * @return {array} An array of dimentions and their ratio [Width, Height, Ratio]
+ */
+function getOptimalDimensions(idealWidth, idealHeight, maxWidth, maxHeight) {
+  var ratio = Math.min(maxWidth / idealWidth, (maxHeight - 150) / idealHeight);
+  return [idealWidth * ratio, // Width
+  idealHeight * ratio, // Height
+  ratio // Ratio
+  ];
+}
 
-  if (!context || !settings) {
-    throw new Error('Invalid args');
-  }
+/**
+ * Creates a canvas.
+ *
+ * @param {string} type
+ * @param {number} zIndex
+ * @param {number} width
+ * @param {number} height
+ * @returns {HTMLCanvasElement}
+ */
+function createCanvas(type, zIndex, width, height) {
+  var canvas = document.createElement('canvas');
 
-  var brushTypes = ["clear", "fog"],
-      currentBrushType = brushTypes[0],
-      setBrushType = function setBrushType() {
-    console.error("Doesn't exist yet");
-  },
-      toggle = function toggle() {
-    if (currentBrushType === brushTypes[0]) {
-      console.log("shroud brush set");
-      currentBrushType = brushTypes[1];
-    } else if (currentBrushType === brushTypes[1]) {
+  console.log('creating canvas ' + type);
+  canvas.width = width;
+  canvas.height = height;
+  canvas.id = type + Math.floor(Math.random() * 100000);
+  canvas.className = type + ' map-canvas';
+  canvas.style.position = 'absolute';
+  canvas.style.left = '0';
+  canvas.style.top = '0';
+  canvas.style.zIndex = zIndex;
+  return canvas;
+}
 
-      console.log("clear brush set");
-      currentBrushType = brushTypes[0];
-    } else {
-      console.log("nothing: ");
-      console.log(currentBrushType);
-    }
-    context.strokeStyle = getCurrent();
-  },
-      getPattern = function getPattern(brushType) {
-    if (brushType === brushTypes[0]) {
-      context.globalCompositeOperation = 'destination-out';
-      return 'rgba(' + settings.fogRGB + ',' + settings.fogOpacity + ')';
-    } else if (brushType === brushTypes[1]) {
-      context.globalCompositeOperation = 'source-over';
-      return 'rgba(' + settings.fogRGB + ',' + settings.fogOpacity + ')';
-    }
-  },
-      getCurrent = function getCurrent() {
-    return getPattern(currentBrushType);
-  };
+/**
+ * Create multiple canvases required for the map.
+ *
+ * @export
+ * @param {number} width
+ * @param {number} height
+ * @returns {array} Array of canvas elements
+ */
+function createCanvases(width, height) {
+  return [createCanvas('map-image-canvas', 1, width, height), createCanvas('fow-canvas', 2, width, height), createCanvas('cursor-canvas', 3, width, height)];
+}
 
-  return {
-    brushTypes: brushTypes,
-    currentBrushType: currentBrushType,
-    setBrushType: setBrushType,
-    toggle: toggle,
-    getCurrent: getCurrent,
-    getPattern: getPattern
-  };
-});
+/**
+ *
+ *
+ * @export
+ * @param {HTMLCanvasElement} bottomCanvas
+ * @param {HTMLCanvasElement} topCanvas
+ * @param {number} width
+ * @param {number} height
+ * @returns {HTMLCanvasElement} A merged canvas element.
+ */
+function mergeCanvas(bottomCanvas, topCanvas, width, height) {
+  var mergedCanvas = document.createElement('canvas');
+  var mergedContext = mergedCanvas.getContext('2d');
+  mergedCanvas.width = width;
+  mergedCanvas.height = height;
+  mergedContext.drawImage(bottomCanvas, 0, 0, width, height);
+  mergedContext.drawImage(topCanvas, 0, 0, width, height);
+  return mergedCanvas;
+}
+
+/**
+ * Creates and returns a HTML element to contain the canvases.
+ *
+ * @export
+ * @returns {HTMLElement}
+ */
+function getContainer() {
+  var container = document.getElementById('canvasContainer') || document.createElement('div');
+
+  container.id = 'canvasContainer'; //TODO: wont work for multiple containers
+  container.style.position = 'relative';
+  container.style.top = '0';
+  container.style.left = '0';
+  container.style.margin = 'auto';
+  return container;
+}
+
+/**
+ *
+ *
+ * @export
+ * @param {HTMLCanvasElement} canvas
+ * @returns {HTMLImageElement}
+ */
+function convertCanvasToImage(canvas) {
+  var image = new Image();
+  image.src = canvas.toDataURL('image/png');
+  return image;
+}
+
+/**
+ * Creates a canvas from an image
+ *
+ * @export
+ * @param {*} img
+ * @param {number} width
+ * @param {number} height
+ * @returns
+ */
+function createImageCanvas(img, width, height) {
+  var imageCanvas = document.createElement('canvas');
+  var imageContext = imageCanvas.getContext('2d');
+  imageCanvas.width = width;
+  imageCanvas.height = height;
+  imageContext.drawImage(img, 0, 0, width, height);
+  return imageCanvas;
+}
 
 /***/ }),
 /* 65 */
@@ -15582,7 +15641,7 @@ module.exports = __webpack_require__(66);
 
 
 var utils = __webpack_require__(1);
-var bind = __webpack_require__(27);
+var bind = __webpack_require__(26);
 var Axios = __webpack_require__(68);
 var defaults = __webpack_require__(13);
 
@@ -15617,9 +15676,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(31);
+axios.Cancel = __webpack_require__(30);
 axios.CancelToken = __webpack_require__(82);
-axios.isCancel = __webpack_require__(30);
+axios.isCancel = __webpack_require__(29);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -15772,7 +15831,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(29);
+var createError = __webpack_require__(28);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -16205,7 +16264,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(79);
-var isCancel = __webpack_require__(30);
+var isCancel = __webpack_require__(29);
 var defaults = __webpack_require__(13);
 var isAbsoluteURL = __webpack_require__(80);
 var combineURLs = __webpack_require__(81);
@@ -16365,7 +16424,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(31);
+var Cancel = __webpack_require__(30);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
