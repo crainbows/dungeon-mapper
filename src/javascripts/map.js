@@ -43,6 +43,7 @@ function create(parentElem) {
     fogMap();
     createRender();
     setUpDrawingEvents();
+    createDMToolbar(parentElem);
     setupCursorTracking();
     fitMapToWindow();
     window.addEventListener('resize', () => fitMapToWindow());
@@ -282,17 +283,25 @@ function setUpDrawingEvents() {
 
   //TODO: move all of this jquery stuff somewhere else
   
-  $('#btn-shroud-all').click(function () {
+
+
+  document.addEventListener('mouseup', function () {
+    brush.isDrawing = false;
+  });
+}
+
+function createDMToolbar(parentElem){
+  $(parentElem).find('.btn-shroud-all').click(function () {
     fogMap();
     createRender();
   });
   
-  $('#btn-clear-all').click(function () {
+  $(parentElem).find('.btn-clear-all').click(function () {
     clearMap();
     createRender();
   });
 
-  $('#btn-toggle-brush').click(function () {
+  $(parentElem).find('.btn-toggle-brush').click(function () {
     if (this.innerHTML === 'Clear Brush') {
       this.innerHTML = 'Shadow Brush';
     } else {
@@ -301,15 +310,15 @@ function setUpDrawingEvents() {
     brush.toggle();
   });
   
-  $('#btn-shrink-brush').click(function () {
+  $(parentElem).find('.btn-shrink-brush').click(function () {
     brush.shrink();
   });
   
-  $('#btn-enlarge-brush').click(function () {
+  $(parentElem).find('.btn-enlarge-brush').click(function () {
     brush.enlarge();
   });
   
-  $('#btn-shape-brush').click(function () {
+  $(parentElem).find('.btn-shape-brush').click(function () {
     if (this.innerHTML === 'Square Brush') {
       this.innerHTML = 'Circle Brush';
       brush.shape = 'square'
@@ -318,10 +327,6 @@ function setUpDrawingEvents() {
       brush.shape = 'round'
     }
 
-  });
-
-  document.addEventListener('mouseup', function () {
-    brush.isDrawing = false;
   });
 }
 

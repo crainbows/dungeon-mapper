@@ -38,7 +38,7 @@ $('#btn-new-map').click(function () {
   $('#upload').show();
 });
 
-$('#btn-send').click(function () {
+$(mapWrapper).find('.btn-send').click(function () {
   dmMap.createRender();
   let imageData = document.getElementById('render').src;
 

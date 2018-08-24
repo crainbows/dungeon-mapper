@@ -8,9 +8,7 @@
  * @return {array} An array of dimentions and their ratio [Width, Height, Ratio]
  */
 export function getOptimalDimensions(idealWidth, idealHeight, maxWidth, maxHeight) {
-  console.log(idealWidth, idealHeight, maxWidth, maxHeight);
   let ratio = Math.min(maxWidth / idealWidth, (maxHeight - 150) / idealHeight);
-
   return [
     idealWidth * ratio, // Width
     idealHeight * ratio,// Height
