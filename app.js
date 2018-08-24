@@ -121,15 +121,23 @@ app.get('/dm/map', function (req, res) {
 });
 
 
+app.get('/dm/listmaps', function (req, res) {
+  if( req.headers['host'] == 'localhost:3000' ){
+    let fs = require('fs');
+    let files = fs.readdirSync('./public/uploads');
+    res.status(200).send(files.filter(el => el.match(/map[0-9]*\./g)));
+  }
+});
+
 // For DM map uploads. These are the raw images without any fog of war. 
 app.post('/upload', function (req, res) {
 
   req.pipe(req.busboy);
 
   req.busboy.on('file', function (fieldname, file, filename) {
-
+    let randomNumber = Math.floor(Math.random() * 100000);
     var fileExtension = filename.split('.').pop(),
-      uploadedImageSavePath = path.join(UPLOADS_DIR + 'map.' + fileExtension),
+      uploadedImageSavePath = path.join(UPLOADS_DIR + 'map' + randomNumber + '.' + fileExtension),
       fstream;
             
     deleteExistingMapFilesSync();
@@ -140,7 +148,7 @@ app.post('/upload', function (req, res) {
     fstream.on('close', function () {
       console.log('map uploaded');
       mostRecentRawImagePath = uploadedImageSavePath;
-      res.sendStatus(200);
+      res.status(200).send({ imgPath: 'uploads/map' + randomNumber + '.' + fileExtension});
     });
     // should do something for a failure as well
   });
