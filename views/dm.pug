@@ -13,14 +13,22 @@ block content
                 a.navbar-brand Dungeon Mapper
                 
             #bs-example-navbar-collapse-2.collapse.navbar-collapse
-              form.navbar-form.navbar-left(role='search')
-                button#btn-new-map.btn.btn-default(type='button') New Map
-                a.btn.btn-default(type='button' href='/quit') Quit
-        #upload-wrapper
+              div.navbar-form.navbar-left(role='search')
+                <button id="btn-new-map" class="btn btn-default" type="button" :class="{active: selectedMap == 0}" @click="selectedMap = 0">New Map</button>
+                
+                <div class="btn-group" v-for="(map, index) in maps" :class="{active: map.id == selectedMap}">
+                    <button type="button" class="btn btn-default"  @click="selectedMap = map.id;selectedMapIndex = index">{{ map.id }}</button>
+                    <button type="button" class="btn btn-default" @click="deleteMap(map);">
+                        <span class="text-danger glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+              div.navbar-form.navbar-right(role='search')
+                a.btn.btn-danger(type='button' href='/quit') Quit
+        <div id="upload-wrapper" v-show="selectedMap == 0">
           #upload.dropzone
-
-        #map-wrapper
-            #dm-toolbar.toolbar-wrapper
+        </div>
+        <div class="map-wrapper" v-for="(map, index) in maps" :id="'map'+map.id" v-show="selectedMap == map.id">
+            .dm-toolbar.toolbar-wrapper
                 .btn-toolbar
                     .btn-group
                         a.btn-shroud-all.btn.btn-default Shroud All
@@ -31,8 +39,11 @@ block content
                         a.btn-enlarge-brush.btn.btn-default Enlarge Brush
                         a.btn-shape-brush.btn.btn-default Square Brush
                     .btn-group
-                        a.btn-send.btn.btn-default Send
+                    <button type="button" class="btn btn-success" @click="sendMap(map)">Send Map</button>
+
+        </div>                        
         ul#messages
+        #player-map-wrapper
 
 
 block js

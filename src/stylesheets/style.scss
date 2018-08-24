@@ -29,7 +29,7 @@ html, body, #wrapper {
 	font-family: folkard, cardinal, palitino, serif;
 	font-size: 150%;
 }
-#dm-toolbar {
+.dm-toolbar {
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -41,6 +41,10 @@ html, body, #wrapper {
 }
 .btn-toolbar {
 	display: inline-block;
+}
+.deleteMap {
+	font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+	cursor: pointer;
 }
 #dmCanvas {
 	opacity: 0.5;

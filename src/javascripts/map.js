@@ -3,7 +3,7 @@ const $ = jquery;
 import Brush from './brush';
 import * as canvas from './canvas';
 export default class Map {
-  constructor(parentElem, imgPath){
+  constructor(parentElem, imgPath, mapId){
     this.parentElem = parentElem;
     this.imgPath = imgPath;
     this.cursorContext;
@@ -17,9 +17,9 @@ export default class Map {
     this.width = 1400;
     this.height = 8000;
     this.originalcoords;
-    this.create(parentElem);
+    this.create(parentElem, mapId);
   }
-  create(parentElem) {
+  create(parentElem, mapId) {
     const parent = this;
     this.mapImage = new Image();
     this.mapImage.onerror = () => console.error('error creating map');
@@ -28,7 +28,7 @@ export default class Map {
       let container;
       // TODO: make this more readable
       [parent.width, parent.height] = canvas.getOptimalDimensions(parent.mapImage.width, parent.mapImage.height, parent.width, parent.height);
-      container = canvas.getContainer();
+      container = canvas.getContainer(mapId);
       parentElem.appendChild(container);
   
       [parent.mapImageCanvas, parent.fowCanvas,parent.cursorCanvas] = canvas.createCanvases(parent.width, parent.height);
@@ -48,10 +48,10 @@ export default class Map {
       parent.fogMap();
       parent.createRender();
       parent.setUpDrawingEvents();
-      parent.createDMToolbarListeners(parentElem);
+      parent.createDMToolbarListeners(parentElem.firstChild.firstChild);
       parent.setupCursorTracking();
       parent.fitMapToWindow();
-      window.addEventListener('resize', () => this.fitMapToWindow());
+      window.addEventListener('resize', () => parent.fitMapToWindow());
     };
     this.mapImage.crossOrigin = 'Anonymous'; // to prevent tainted canvas errors
     this.mapImage.src = this.imgPath;
@@ -297,6 +297,7 @@ export default class Map {
   }
   
   createDMToolbarListeners(parentElem){
+    const parent = this;
     $(parentElem).find('.btn-shroud-all').click(function () {
       parent.fogMap();
       parent.createRender();
@@ -307,29 +308,29 @@ export default class Map {
       parent.createRender();
     });
   
-    $(parentElem).find('.btn-toggle-this.brush').click(function () {
-      if (this.innerHTML === 'Clear this.brush') {
-        this.innerHTML = 'Shadow this.brush';
+    $(parentElem).find('.btn-toggle-brush').click(function () {
+      if (this.innerHTML === 'Clear Brush') {
+        this.innerHTML = 'Shadow Brush';
       } else {
-        this.innerHTML = 'Clear this.brush';
+        this.innerHTML = 'Clear Brush';
       }
       parent.brush.toggle();
     });
     
-    $(parentElem).find('.btn-shrink-this.brush').click(function () {
+    $(parentElem).find('.btn-shrink-brush').click(function () {
       parent.brush.shrink();
     });
     
-    $(parentElem).find('.btn-enlarge-this.brush').click(function () {
+    $(parentElem).find('.btn-enlarge-brush').click(function () {
       parent.brush.enlarge();
     });
     
-    $(parentElem).find('.btn-shape-this.brush').click(function () {
-      if (this.innerHTML === 'Square this.brush') {
-        this.innerHTML = 'Circle this.brush';
+    $(parentElem).find('.btn-shape-brush').click(function () {
+      if (this.innerHTML === 'Square Brush') {
+        this.innerHTML = 'Circle Brush';
         parent.brush.shape = 'square'
       } else {
-        this.innerHTML = 'Square this.brush';
+        this.innerHTML = 'Square Brush';
         parent.brush.shape = 'round'
       }
   
@@ -353,7 +354,7 @@ export default class Map {
     mergedImage.id = 'render';
   
     //todo: refactor this functionality outside
-    document.querySelector('#map-wrapper').appendChild(mergedImage);
+    document.querySelector('#player-map-wrapper').appendChild(mergedImage);
   }
   
 }

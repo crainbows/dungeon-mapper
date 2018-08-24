@@ -45,7 +45,7 @@ body,
   font-size: 150%;
 }
 
-#dm-toolbar {
+.dm-toolbar {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -59,6 +59,11 @@ body,
 
 .btn-toolbar {
   display: inline-block;
+}
+
+.deleteMap {
+  font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+  cursor: pointer;
 }
 
 #dmCanvas {

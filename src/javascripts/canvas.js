@@ -83,10 +83,10 @@ export function mergeCanvas(bottomCanvas, topCanvas, width, height) {
  * @export
  * @returns {HTMLElement}
  */
-export function getContainer() {
-  let container = document.getElementById('canvasContainer') || document.createElement('div');
+export function getContainer(mapId) {
+  let container = document.createElement('div');
 
-  container.id = 'canvasContainer'; //TODO: wont work for multiple containers
+  container.id = 'canvasContainer'+mapId; //TODO: wont work for multiple containers
   container.style.position = 'relative';
   container.style.top = '0';
   container.style.left = '0';

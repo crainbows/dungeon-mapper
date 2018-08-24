@@ -129,6 +129,27 @@ app.get('/dm/listmaps', function (req, res) {
   }
 });
 
+
+app.post('/dm/map', function (req, res) {
+  if( req.headers['host'] == 'localhost:3000' ){
+    let imgPath = req.body.imgPath;
+    if(!imgPath.match(/^map[0-9]*\.(?:gif|tiff|bmp|jpeg|png|jpg)/gi)) {
+      // Malformed Path
+      res.sendStatus(400);
+    }else{
+      fs.unlink('public/uploads/'+imgPath, (err) => {
+        if (err){
+          res.sendStatus(500);
+          throw err;
+        }else{
+          console.log(imgPath+' was deleted');
+          res.sendStatus(200);
+        }
+      });
+    }
+  }
+});
+
 // For DM map uploads. These are the raw images without any fog of war. 
 app.post('/upload', function (req, res) {
 
