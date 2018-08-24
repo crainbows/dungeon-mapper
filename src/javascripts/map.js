@@ -1,38 +1,32 @@
 import jquery from 'jquery';
 const $ = jquery;
 import Brush from './brush';
-import {createCanvases, mergeCanvas, getContainer,convertCanvasToImage,createImageCanvas, getOptimalDimensions} from './canvas';
+import * as canvas from './canvas';
+export {create, remove, createRender};
 let cursorContext;
 let cursorCanvas;
 let fowContext;
 let fowCanvas;
 let mapImageContext;
 let mapImageCanvas;
-let fowBrush;
+let brush;
 let mapImage;
 let width = 1400;
 let height = 8000;
-let isDrawing = false;
-let originalCords;
-let lineWidth = 15;
-let brushShape = 'round';
+let originalcoords;
 
-export function create(parentElem) {
+function create(parentElem) {
   mapImage = new Image();
   mapImage.onerror = () => console.error('error creating map');
   mapImage.onload = function () {
     let container;
 
-    console.log('mapImage loaded');
-
     // TODO: make this more readable
-    [width, height] = getOptimalDimensions(mapImage.width, mapImage.height, width, height);
-    console.log(width);
-    console.log(height);
-    container = getContainer();
+    [width, height] = canvas.getOptimalDimensions(mapImage.width, mapImage.height, width, height);
+    container = canvas.getContainer();
     parentElem.appendChild(container);
 
-    [mapImageCanvas, fowCanvas,cursorCanvas] = createCanvases(width, height);
+    [mapImageCanvas, fowCanvas,cursorCanvas] = canvas.createCanvases(width, height);
 
     container.appendChild(mapImageCanvas);
     container.appendChild(fowCanvas);
@@ -41,10 +35,10 @@ export function create(parentElem) {
     mapImageContext = mapImageCanvas.getContext('2d');
     fowContext = fowCanvas.getContext('2d');
     cursorContext = cursorCanvas.getContext('2d');
-    mapImageContext.drawImage(createImageCanvas(mapImage, width, height), 0, 0, width, height);
+    mapImageContext.drawImage(canvas.createImageCanvas(mapImage, width, height), 0, 0, width, height);
 
-    fowBrush = new Brush(fowContext);
-    fowContext.strokeStyle = fowBrush.getCurrent();
+    brush = new Brush(fowContext);
+    fowContext.strokeStyle = brush.getCurrent();
 
     fogMap();
     createRender();
@@ -57,7 +51,6 @@ export function create(parentElem) {
   mapImage.src = '/dm/map';
 }
 
-
 function getMouseCoordinates(e) {
   let viewportOffset = fowCanvas.getBoundingClientRect(),
     borderTop = parseInt($(fowCanvas).css('border-top-width')),
@@ -69,9 +62,6 @@ function getMouseCoordinates(e) {
   };
 }
 
-
-
-
 function resetMap(context, brushType, brush) {
   context.save();
   context.fillStyle = brush.getPattern(brushType);
@@ -80,14 +70,14 @@ function resetMap(context, brushType, brush) {
 }
 
 function fogMap() {
-  resetMap(fowContext, 'fog', fowBrush);
+  resetMap(fowContext, 'fog', brush);
 }
 
 function clearMap() {
-  resetMap(fowContext, 'clear', fowBrush);
+  resetMap(fowContext, 'clear', brush);
 }
 
-export function resize(displayWidth, displayHeight) {
+function resize(displayWidth, displayHeight) {
   fowCanvas.style.width = displayWidth + 'px';
   fowCanvas.style.height = displayHeight + 'px';
   mapImageCanvas.style.width = displayWidth + 'px';
@@ -104,16 +94,12 @@ export function resize(displayWidth, displayHeight) {
 }
 
 // Maybe having this here violates cohesion
-export function fitMapToWindow() {
-  let newDims = getOptimalDimensions(mapImageCanvas.width, mapImageCanvas.height, $(window).width(), $(window).height());
+function fitMapToWindow() {
+  let newDims = canvas.getOptimalDimensions(mapImageCanvas.width, mapImageCanvas.height, $(window).width(), $(window).height());
   resize(newDims[0], newDims[1]);
 }
 
-export function toImage() {
-  return convertCanvasToImage(mergeCanvas(mapImageCanvas, fowCanvas, width, height));
-}
-
-export function remove() {
+function remove() {
   mapImageCanvas.remove();
   fowCanvas.remove();
   cursorCanvas.remove();
@@ -121,32 +107,6 @@ export function remove() {
 
 function getMapDisplayRatio() {
   return parseFloat(mapImageCanvas.style.width, 10) / mapImageCanvas.width;
-}
-
-function constructMask(cords) {
-  let maskDimensions = {
-    x: cords.x,
-    y: cords.y,
-    lineWidth: 2,
-    line: 'aqua',
-    fill: 'transparent'
-  };
-
-  if (brushShape == 'round') {
-    maskDimensions.r = lineWidth / 2;
-    maskDimensions.startingAngle = 0;
-    maskDimensions.endingAngle = Math.PI * 2
-  } else if (brushShape == 'square') {
-    maskDimensions.centerX = maskDimensions.x - lineWidth / 2;
-    maskDimensions.centerY = maskDimensions.y - lineWidth / 2;
-    maskDimensions.height = lineWidth;
-    maskDimensions.width = lineWidth;
-  } else {
-    throw new Error('brush shape not found')
-  }
-
-  return maskDimensions
-
 }
 
 function findOptimalRhombus(pointCurrent, pointPrevious) {
@@ -165,25 +125,25 @@ function findOptimalRhombus(pointCurrent, pointPrevious) {
   }];
   if ((pointCurrent.x < pointPrevious.x && pointCurrent.y > pointPrevious.y) || (pointCurrent.x > pointPrevious.x && pointCurrent.y < pointPrevious.y)) {
     // Moving NE or SW /
-    rhombusCoords[0].x = pointCurrent.x + lineWidth / 2;
-    rhombusCoords[0].y = pointCurrent.y + lineWidth / 2;
-    rhombusCoords[1].x = pointPrevious.x + lineWidth / 2;
-    rhombusCoords[1].y = pointPrevious.y + lineWidth / 2;
-    rhombusCoords[2].x = pointPrevious.x - lineWidth / 2;
-    rhombusCoords[2].y = pointPrevious.y - lineWidth / 2;
-    rhombusCoords[3].x = pointCurrent.x - lineWidth / 2;
-    rhombusCoords[3].y = pointCurrent.y - lineWidth / 2;
+    rhombusCoords[0].x = pointCurrent.x + brush.lineWidth / 2;
+    rhombusCoords[0].y = pointCurrent.y + brush.lineWidth / 2;
+    rhombusCoords[1].x = pointPrevious.x + brush.lineWidth / 2;
+    rhombusCoords[1].y = pointPrevious.y + brush.lineWidth / 2;
+    rhombusCoords[2].x = pointPrevious.x - brush.lineWidth / 2;
+    rhombusCoords[2].y = pointPrevious.y - brush.lineWidth / 2;
+    rhombusCoords[3].x = pointCurrent.x - brush.lineWidth / 2;
+    rhombusCoords[3].y = pointCurrent.y - brush.lineWidth / 2;
     return rhombusCoords;
   } else if ((pointCurrent.x > pointPrevious.x && pointCurrent.y > pointPrevious.y) || (pointCurrent.x < pointPrevious.x && pointCurrent.y < pointPrevious.y)) {
     // Moving NW or SE \
-    rhombusCoords[0].x = pointCurrent.x - lineWidth / 2;
-    rhombusCoords[0].y = pointCurrent.y + lineWidth / 2;
-    rhombusCoords[1].x = pointPrevious.x - lineWidth / 2;
-    rhombusCoords[1].y = pointPrevious.y + lineWidth / 2;
-    rhombusCoords[2].x = pointPrevious.x + lineWidth / 2;
-    rhombusCoords[2].y = pointPrevious.y - lineWidth / 2;
-    rhombusCoords[3].x = pointCurrent.x + lineWidth / 2;
-    rhombusCoords[3].y = pointCurrent.y - lineWidth / 2;
+    rhombusCoords[0].x = pointCurrent.x - brush.lineWidth / 2;
+    rhombusCoords[0].y = pointCurrent.y + brush.lineWidth / 2;
+    rhombusCoords[1].x = pointPrevious.x - brush.lineWidth / 2;
+    rhombusCoords[1].y = pointPrevious.y + brush.lineWidth / 2;
+    rhombusCoords[2].x = pointPrevious.x + brush.lineWidth / 2;
+    rhombusCoords[2].y = pointPrevious.y - brush.lineWidth / 2;
+    rhombusCoords[3].x = pointCurrent.x + brush.lineWidth / 2;
+    rhombusCoords[3].y = pointCurrent.y - brush.lineWidth / 2;
     return rhombusCoords;
   }
 }
@@ -193,40 +153,40 @@ function setupCursorTracking() {
   // Mouse Click
   cursorCanvas.onmousedown = function (e) {
     // Start drawing
-    isDrawing = true;
+    brush.isDrawing = true;
 
-    // Get correct cords from mouse click
-    let cords = getMouseCoordinates(e);
+    // Get correct coords from mouse click
+    let coords = getMouseCoordinates(e);
 
     // Draw initial Shape
     // set lineWidth to 0 for initial drawing of shape to prevent screwing up of size/placement
-    fowCanvas.drawInitial(cords)
+    fowCanvas.drawInitial(coords)
   };
 
   // Mouse Move
   cursorCanvas.onmousemove = function (e) {
-    //get cords and points
-    let newCords = getMouseCoordinates(e);
-    if (isDrawing) {
-      fowCanvas.draw(newCords);
+    //get coords and points
+    let newcoords = getMouseCoordinates(e);
+    if (brush.isDrawing) {
+      fowCanvas.draw(newcoords);
     }
     // Draw cursor and fow
-    cursorCanvas.drawCursor(newCords);
+    cursorCanvas.drawCursor(newcoords);
   };
 
-  cursorCanvas.drawCursor = function (cords) {
+  cursorCanvas.drawCursor = function (coords) {
     // Cleanup
     cursorContext.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
 
     // Construct circle dimensions
-    let cursorMask = constructMask(cords);
+    let cursorMask = brush.getMask(coords);
 
     cursorContext.strokeStyle = cursorMask.line;
     cursorContext.fillStyle = cursorMask.fill;
     cursorContext.lineWidth = cursorMask.lineWidth;
 
     cursorContext.beginPath();
-    if (brushShape == 'round') {
+    if (brush.shape == 'round') {
       cursorContext.arc(
         cursorMask.x,
         cursorMask.y,
@@ -235,7 +195,7 @@ function setupCursorTracking() {
         cursorMask.endingAngle,
         true
       );
-    } else if (brushShape == 'square') {
+    } else if (brush.shape == 'square') {
       cursorContext.rect(
         cursorMask.centerX,
         cursorMask.centerY,
@@ -251,13 +211,13 @@ function setupCursorTracking() {
 
 function setUpDrawingEvents() {
   fowCanvas.drawInitial = function (coords) {
-    originalCords = coords;
+    originalcoords = coords;
     // Construct mask dimensions
-    let fowMask = constructMask(coords);
+    let fowMask = brush.getMask(coords);
     fowContext.lineWidth = fowMask.lineWidth;
 
     fowContext.beginPath();
-    if (brushShape == 'round') {
+    if (brush.shape == 'round') {
       fowContext.arc(
         fowMask.x,
         fowMask.y,
@@ -266,7 +226,7 @@ function setUpDrawingEvents() {
         fowMask.endingAngle,
         true
       );
-    } else if (brushShape == 'square') {
+    } else if (brush.shape == 'square') {
       fowContext.rect(
         fowMask.centerX,
         fowMask.centerY,
@@ -278,29 +238,29 @@ function setUpDrawingEvents() {
     fowContext.stroke();
   };
 
-  fowCanvas.draw = function (newCords) {
-    if (!isDrawing) return;
-    if (newCords == originalCords) return;
-    if (brushShape == 'round') {
+  fowCanvas.draw = function (newcoords) {
+    if (!brush.isDrawing) return;
+    if (newcoords == originalcoords) return;
+    if (brush.shape == 'round') {
 
       // Start Path
-      fowContext.lineWidth = lineWidth;
+      fowContext.lineWidth = brush.lineWidth;
       fowContext.lineJoin = fowContext.lineCap = 'round';
       fowContext.beginPath();
 
-      fowContext.moveTo(newCords.x, newCords.y);
+      fowContext.moveTo(newcoords.x, newcoords.y);
 
       // Coordinates
-      fowContext.lineTo(originalCords.x, originalCords.y);
+      fowContext.lineTo(originalcoords.x, originalcoords.y);
       fowContext.stroke();
-      originalCords = newCords;
-    } else if (brushShape == 'square') {
+      originalcoords = newcoords;
+    } else if (brush.shape == 'square') {
 
       fowContext.lineWidth = 1
       fowContext.beginPath();
 
       // draw rectangle at current point
-      let fowMask = constructMask(newCords);
+      let fowMask = brush.getMask(newcoords);
       fowContext.fillRect(
         fowMask.centerX,
         fowMask.centerY,
@@ -308,7 +268,7 @@ function setUpDrawingEvents() {
         fowMask.width);
 
       // optimal polygon to draw to connect two square
-      let optimalPoints = findOptimalRhombus(newCords, originalCords);
+      let optimalPoints = findOptimalRhombus(newcoords, originalcoords);
       if (optimalPoints) {
         fowContext.moveTo(optimalPoints[0].x, optimalPoints[0].y);
         fowContext.lineTo(optimalPoints[1].x, optimalPoints[1].y);
@@ -316,65 +276,57 @@ function setUpDrawingEvents() {
         fowContext.lineTo(optimalPoints[3].x, optimalPoints[3].y);
         fowContext.fill();
       }
-      originalCords = newCords;
+      originalcoords = newcoords;
     }
   };
 
   //TODO: move all of this jquery stuff somewhere else
-
-  $('#btn-toggle-brush').click(function () {
-    let toggleButton = this;
-    if (toggleButton.innerHTML === 'Clear Brush') {
-      toggleButton.innerHTML = 'Shadow Brush';
-    } else {
-      toggleButton.innerHTML = 'Clear Brush';
-    }
-    fowBrush.toggle();
-  });
-
+  
   $('#btn-shroud-all').click(function () {
     fogMap();
     createRender();
   });
-
+  
   $('#btn-clear-all').click(function () {
     clearMap();
     createRender();
   });
 
-  $('#btn-enlarge-brush').click(function () {
-    // If the new width would be over 200, set it to 200
-    lineWidth = (lineWidth * 2 > 200) ? 200 : lineWidth * 2;
-  });
-
-  $('#btn-shrink-brush').click(function () {
-    // If the new width would be less than 1, set it to 1
-    lineWidth = (lineWidth / 2 < 1) ? 1 : lineWidth / 2;
-  });
-
-  $('#btn-shape-brush').click(function () {
-    let toggleButton = this;
-    if (toggleButton.innerHTML === 'Square Brush') {
-      toggleButton.innerHTML = 'Circle Brush';
-      brushShape = 'square'
+  $('#btn-toggle-brush').click(function () {
+    if (this.innerHTML === 'Clear Brush') {
+      this.innerHTML = 'Shadow Brush';
     } else {
-      toggleButton.innerHTML = 'Square Brush';
-      brushShape = 'round'
+      this.innerHTML = 'Clear Brush';
+    }
+    brush.toggle();
+  });
+  
+  $('#btn-shrink-brush').click(function () {
+    brush.shrink();
+  });
+  
+  $('#btn-enlarge-brush').click(function () {
+    brush.enlarge();
+  });
+  
+  $('#btn-shape-brush').click(function () {
+    if (this.innerHTML === 'Square Brush') {
+      this.innerHTML = 'Circle Brush';
+      brush.shape = 'square'
+    } else {
+      this.innerHTML = 'Square Brush';
+      brush.shape = 'round'
     }
 
   });
 
-  $('#btn-render').click(function () {
-    createRender();
-  });
-
   document.addEventListener('mouseup', function () {
-    isDrawing = false;
+    brush.isDrawing = false;
   });
 }
 
-//todo: move this functionality elsewher
-export function createRender() {
+//todo: move this functionality elsewhere
+function createRender() {
   removeRender();
   createPlayerMapImage(mapImageCanvas, fowCanvas);
 }
@@ -384,8 +336,8 @@ function removeRender() {
 }
 
 function createPlayerMapImage(bottomCanvas, topCanvas) {
-  let mergedCanvas = mergeCanvas(bottomCanvas, topCanvas, width, height),
-    mergedImage = convertCanvasToImage(mergedCanvas);
+  let mergedCanvas = canvas.mergeCanvas(bottomCanvas, topCanvas, width, height),
+    mergedImage = canvas.convertCanvasToImage(mergedCanvas);
 
   mergedImage.id = 'render';
 

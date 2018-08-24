@@ -1,5 +1,3 @@
-import { HexBase64Latin1Encoding } from "crypto";
-
 /**
  * Returns maximum dimentions for an image without distorting the aspect ratio.
  * 
@@ -103,7 +101,7 @@ export function getContainer() {
  *
  * @export
  * @param {HTMLCanvasElement} canvas
- * @returns {HexBase64Latin1Encoding}
+ * @returns {HTMLImageElement}
  */
 export function convertCanvasToImage(canvas) {
   let image = new Image();
