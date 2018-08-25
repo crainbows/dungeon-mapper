@@ -34,7 +34,7 @@ app.set('view engine', 'pug');
 
 // Not sure if this is needed, Chrome seems to grab the favicon just fine anyway
 // Maybe for cross-browser support
-app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 
 // Needed to handle JSON posts, size limit of 50mb
