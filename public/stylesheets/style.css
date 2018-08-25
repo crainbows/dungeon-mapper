@@ -145,8 +145,9 @@ body,
           transform: translate(-50%, -50%);
 }
 
-.transparent {
-  opacity: 0;
+.dropzone .dz-message {
+  font-family: folkard, Georgia,"Times New Roman",Times,serif;
+  font-size: 4rem;
 }
 
 div#upload {
