@@ -11470,6 +11470,11 @@ var vm = new __WEBPACK_IMPORTED_MODULE_3_vue___default.a({
         return console.error(error);
       }).finally(function () {
         that.createMapsFromList();
+        if (that.maps.length < 1) {
+          that.selectedMap = 0;
+        } else {
+          that.selectedMap = that.maps[that.maps.length - 1].id;
+        }
       });
     },
     createMapsFromList: function createMapsFromList() {

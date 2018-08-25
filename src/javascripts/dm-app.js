@@ -39,6 +39,11 @@ const vm = new Vue({
         .catch(error => console.error(error))
         .finally(() => {
           that.createMapsFromList();
+          if(that.maps.length < 1){
+            that.selectedMap = 0;
+          }else{
+            that.selectedMap = that.maps[that.maps.length - 1].id;
+          }
         });
     },
     createMapsFromList: function (that = this) {
