@@ -11,9 +11,9 @@ socket.on('map update', function (msg) {
   if (msg && msg.imageData) {
     console.log('got a map update');
     $('.oldest').remove();
-    $('.map').addClass('oldest').css('z-index', '30');
+    $('.map').addClass('oldest').css('z-index', '20');
     var newMap = new Image();
-    newMap.style.zIndex = 20;
+    newMap.style.zIndex = 30;
     newMap.src = msg.imageData;
     newMap.className = "map img-responsive center-block";
     document.getElementById('map-container').appendChild(newMap);

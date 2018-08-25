@@ -34,7 +34,7 @@ app.set('view engine', 'pug');
 
 // Not sure if this is needed, Chrome seems to grab the favicon just fine anyway
 // Maybe for cross-browser support
-app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 
 // Needed to handle JSON posts, size limit of 50mb
@@ -121,15 +121,44 @@ app.get('/dm/map', function (req, res) {
 });
 
 
+app.get('/dm/listmaps', function (req, res) {
+  if( req.headers['host'] == 'localhost:3000' ){
+    let fs = require('fs');
+    let files = fs.readdirSync('./public/uploads');
+    res.status(200).send(files.filter(el => el.match(/map[0-9]*\./g)));
+  }
+});
+
+
+app.post('/dm/map', function (req, res) {
+  if( req.headers['host'] == 'localhost:3000' ){
+    let imgPath = req.body.imgPath;
+    if(!imgPath.match(/^map[0-9]*\.(?:gif|tiff|bmp|jpeg|png|jpg)/gi)) {
+      // Malformed Path
+      res.sendStatus(400);
+    }else{
+      fs.unlink('public/uploads/'+imgPath, (err) => {
+        if (err){
+          res.sendStatus(500);
+          throw err;
+        }else{
+          console.log(imgPath+' was deleted');
+          res.sendStatus(200);
+        }
+      });
+    }
+  }
+});
+
 // For DM map uploads. These are the raw images without any fog of war. 
 app.post('/upload', function (req, res) {
 
   req.pipe(req.busboy);
 
   req.busboy.on('file', function (fieldname, file, filename) {
-
+    let randomNumber = Math.floor(Math.random() * 100000);
     var fileExtension = filename.split('.').pop(),
-      uploadedImageSavePath = path.join(UPLOADS_DIR + 'map.' + fileExtension),
+      uploadedImageSavePath = path.join(UPLOADS_DIR + 'map' + randomNumber + '.' + fileExtension),
       fstream;
             
     deleteExistingMapFilesSync();
@@ -140,7 +169,7 @@ app.post('/upload', function (req, res) {
     fstream.on('close', function () {
       console.log('map uploaded');
       mostRecentRawImagePath = uploadedImageSavePath;
-      res.sendStatus(200);
+      res.status(200).send({ imgPath: 'uploads/map' + randomNumber + '.' + fileExtension});
     });
     // should do something for a failure as well
   });

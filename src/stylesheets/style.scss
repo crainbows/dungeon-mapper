@@ -22,14 +22,14 @@ html, body, #wrapper {
 	margin: 0px;
 }
 #dm-link {
-	position: absolute;
-	bottom: 10%;
-	right: 4%;
+	position: fixed;
+	bottom: 5vh;
+	right: 5vh;
 	color: white;
 	font-family: folkard, cardinal, palitino, serif;
 	font-size: 150%;
 }
-#dm-toolbar {
+.dm-toolbar {
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -41,6 +41,10 @@ html, body, #wrapper {
 }
 .btn-toolbar {
 	display: inline-block;
+}
+.deleteMap {
+	font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+	cursor: pointer;
 }
 #dmCanvas {
 	opacity: 0.5;
@@ -64,17 +68,20 @@ html, body, #wrapper {
 	height: 100vh;
 	width: 100vw;
 	z-index: 100;
-	background-image: url('/images/DungeonEntranceMedium.jpg');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
+	p {
+		font-size: 4rem;
+		margin-top: 10vh;
+		margin-left: 10vh;
+		color: white;
+		font-family: folkard, palitino, serif;
+	}
 }
 .title-font {
 	font-family: folkard, palitino, serif;
 }
 .title-text {
-	margin-top: 10%;
-	margin-left: 10%;
+  margin-top: 10vh;
+  margin-left: 10vh;
 	color: white;
 	font-family: folkard, palitino, serif;
 	font-size: 600%;
@@ -110,10 +117,15 @@ html, body, #wrapper {
 		left: 50%;
 		margin-right: -50% !important;
 		transform: translate(-50%, -50%);
+		-webkit-transition: opacity 2s ease-in-out;
+		-moz-transition: opacity 2s ease-in-out;
+		-o-transition: opacity 2s ease-in-out;
+		transition: opacity 2s ease-in-out;
 	}
 }
-.transparent {
-	opacity: 0;
+.dropzone .dz-message {
+	font-family: folkard, Georgia,"Times New Roman",Times,serif;
+	font-size: 4rem;
 }
 div#upload {
 	height: 500px;
@@ -157,5 +169,7 @@ div#upload {
 @media (max-width:480px) {
 	.title-text {
 		font-size: 20vw;
+		margin-top: 5vh;
+    margin-left: 5vh;
 	}
 }
