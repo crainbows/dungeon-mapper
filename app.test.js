@@ -13,7 +13,6 @@ var app = require('./app');
 // post upload
 // post send
 
-
 describe('Testing DM web access and responses', () => {
 
   // Testing for DMs
