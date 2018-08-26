@@ -1,4 +1,5 @@
-# Dungeon Mapper &emsp; [![Travis (.org)](https://img.shields.io/travis/Crainbows/dungeon-mapper.svg?style=flat-square)](https://travis-ci.org/Crainbows/dungeon-mapper) [![Requires.io](https://img.shields.io/requires/github/Crainbows/dungeon-mapper.svg?style=flat-square)](https://requires.io/github/Crainbows/dungeon-mapper/requirements/) [![GitHub issues](https://img.shields.io/github/issues-raw/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![GitHub](https://img.shields.io/github/license/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![GitHub tag](https://img.shields.io/github/tag/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
+# Dungeon Mapper &emsp; [![Travis (.org)](https://img.shields.io/travis/Crainbows/dungeon-mapper.svg?style=flat-square)](https://travis-ci.org/Crainbows/dungeon-mapper) [![Requires.io](https://img.shields.io/requires/github/Crainbows/dungeon-mapper.svg?style=flat-square)](https://requires.io/github/Crainbows/dungeon-mapper/requirements/) [![GitHub issues](https://img.shields.io/github/issues-raw/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![GitHub](https://img.shields.io/github/license/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![npm](https://img.shields.io/npm/v/dungeon-mapper.svg?style=flat-square)](https://www.npmjs.com/package/dungeon-mapper)
+
 > Display digital maps to players of tabletop RPGs
 
 This web app for tabletop RPGs allows the Dumgeon Master to reveal selected areas of a digital map to players. This allows you to keep certain areas of the map hidden from the players until they discover them.
@@ -15,21 +16,19 @@ Example images used above from [Dungeon Mapster.](https://patreon.com/dungeonmap
 
 If you are happy using git, node and npm/yarn it is as simple as:
 ```shell
-git clone https://github.com/Crainbows/dungeon-mapper.git
-npm install
+npm install dungeon-mapper
 npm start
 ```
 Otherwise you'll need the following:
-1. Install git. On Windows, I believe if you install the Github version of git it should add git automatically to your path.
-2. Go to https://nodejs.org/download/ and download and install Node. Node is the runtime for this software, which basically means you need it to make the software work. Only one person needs Node (assumed to be the DM). 
-3. Once Node is installed, open a command prompt. 
+1. Go to https://nodejs.org/download/ and download and install Node. Node is the runtime for this software, which basically means you need it to make the software work. Only one person needs Node (assumed to be the DM). 
+2. Once Node is installed, open a command prompt. 
   * For Mac users, press Command + Space and type "terminal" into Spotlight. Press enter and a prompt should open. 
   * For Windows users, press the Windows key and type "command prompt" or "cmd" into the search box and then press enter.
   * For Linux users, you already know how to open the command prompt.
-4. Using the command prompt, change to whatever directory you want to keep this program in. 
-5. Once you are in that directory, type `git clone https://github.com/Crainbows/dungeon-mapper.git ./` into the command prompt and press enter.
-6. Then type `npm install` into the command prompt and press enter and wait a little bit while it installs.
-7. Once it's done type `npm start` into the prompt. Some messages should appear letting you know where to naviagte to in your web browser.
+3. Using the command prompt, change to whatever directory you want to keep this program in. 
+4. Once you are in that directory, type `git clone https://github.com/Crainbows/dungeon-mapper.git ./` into the command prompt and press enter.
+5. Then type `npm install` into the command prompt and press enter and wait a little bit while it installs.
+6. Once it's done type `npm start` into the prompt. Some messages should appear letting you know where to naviagte to in your web browser.
 
   * On some Windows machines, a firewall prompt will appear. Check all of the checkboxes and click OK.
 
