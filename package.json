@@ -1,14 +1,17 @@
 {
   "name": "dungeon-mapper",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "scripts": {
-    "start": "node ./bin/dungeon-mapper",
+    "start": "node ./bin/dungeon-mapper.js",
     "test": "npm run lint && npm run jest",
     "jest": "jest --detectOpenHandles",
-    "lint": "eslint ./*.js src/ --fix",
+
+    "lint": "eslint ./app.js src/ bin/",
+
     "dev": "node node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "node node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production": "node node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "node node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "postinstall": "npm run production"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -25,17 +28,18 @@
     "pug": "^2.0.3",
     "serve-favicon": "~2.4.5",
     "socket.io": "^2.1.1",
-    "ws": "^6.0.0"
+    "vue": "^2.5.17",
+    "ws": "^6.0.0",
+    "babel": "^6.23.0",
+    "laravel-mix": "^2.1.11"
   },
-  "description": "dungeon-mapper ================",
+  "description": "Display digital maps to players of tabletop RPGs",
   "main": "app.js",
   "devDependencies": {
-    "babel": "^6.23.0",
     "babel-eslint": "^8.2.6",
     "eslint": "^5.3.0",
     "eslint-plugin-jest": "^21.19.0",
     "jest": "^23.4.2",
-    "laravel-mix": "^2.1.11",
     "supertest": "^3.1.0"
   },
   "jest": {

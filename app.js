@@ -34,7 +34,7 @@ app.set('view engine', 'pug');
 
 // Not sure if this is needed, Chrome seems to grab the favicon just fine anyway
 // Maybe for cross-browser support
-app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 
 // Needed to handle JSON posts, size limit of 50mb
@@ -54,13 +54,13 @@ app.use(session({secret: generateKey()}));
 // Routes
 // TODO: Move interior logic somewhere else
 app.get('/', function (req, res) {
-  res.render('player', {dm: false, title: 'Dungeon Revealer'});
+  res.render('player', {dm: false, title: 'Dungeon Mapper'});
 });
 
 app.get('/dm', function (req, res) {
   /* console.log( req.headers ); */
   if( req.headers['host'] == 'localhost:3000' ){
-    res.render('dm', {dm: true, title: 'Dungeon Revealer DM Console'});
+    res.render('dm', {dm: true, title: 'Dungeon Mapper DM Console'});
   }
   else
   {
@@ -121,29 +121,65 @@ app.get('/dm/map', function (req, res) {
 });
 
 
+app.get('/dm/listmaps', function (req, res) {
+  if( req.headers['host'] == 'localhost:3000' ){
+    let fs = require('fs');
+    let files = fs.readdirSync('./public/uploads');
+    res.status(200).send(files.filter(el => el.match(/map[0-9]*\./g)));
+  }else{
+    res.sendStatus(403);
+  }
+});
+
+
+app.post('/dm/map', function (req, res) {
+  if( req.headers['host'] == 'localhost:3000' ){
+    let imgPath = req.body.imgPath;
+    if(!imgPath.match(/^map[0-9]*\.(?:gif|tiff|bmp|jpeg|png|jpg)/gi)) {
+      // Malformed Path
+      res.sendStatus(400);
+    }else{
+      fs.unlink('public/uploads/'+imgPath, (err) => {
+        if (err){
+          res.sendStatus(500);
+          throw err;
+        }else{
+          console.log(imgPath+' was deleted');
+          res.sendStatus(200);
+        }
+      });
+    }
+  }else{
+    res.sendStatus(403);
+  }
+});
+
 // For DM map uploads. These are the raw images without any fog of war. 
 app.post('/upload', function (req, res) {
+  if( req.headers['host'] == 'localhost:3000' )  {
+    req.pipe(req.busboy);
 
-  req.pipe(req.busboy);
-
-  req.busboy.on('file', function (fieldname, file, filename) {
-
-    var fileExtension = filename.split('.').pop(),
-      uploadedImageSavePath = path.join(UPLOADS_DIR + 'map.' + fileExtension),
-      fstream;
-            
-    deleteExistingMapFilesSync();
-            
-    fstream = fs.createWriteStream(uploadedImageSavePath);
-        
-    file.pipe(fstream);
-    fstream.on('close', function () {
-      console.log('map uploaded');
-      mostRecentRawImagePath = uploadedImageSavePath;
-      res.sendStatus(200);
+    req.busboy.on('file', function (fieldname, file, filename) {
+      let randomNumber = Math.floor(Math.random() * 100000);
+      var fileExtension = filename.split('.').pop(),
+        uploadedImageSavePath = path.join(UPLOADS_DIR + 'map' + randomNumber + '.' + fileExtension),
+        fstream;
+              
+      deleteExistingMapFilesSync();
+              
+      fstream = fs.createWriteStream(uploadedImageSavePath);
+          
+      file.pipe(fstream);
+      fstream.on('close', function () {
+        console.log('map uploaded');
+        mostRecentRawImagePath = uploadedImageSavePath;
+        res.status(200).send({ imgPath: 'uploads/map' + randomNumber + '.' + fileExtension});
+      });
+      // should do something for a failure as well
     });
-    // should do something for a failure as well
-  });
+  }else{
+    res.status(403).send();
+  }
 
 });
 

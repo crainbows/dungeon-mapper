@@ -1,0 +1,22 @@
+{
+  "short_name": "Dungeon Mapper",
+  "name": "Dungeon Mapper",
+  "icons": [
+    {
+      "src": "/images/favicon-256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/images/favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "48x48"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/",
+  "/javascripts/dm-app.js": "/javascripts/dm-app.js",
+  "/javascripts/player-app.js": "/javascripts/player-app.js",
+  "/stylesheets/style.css": "/stylesheets/style.css"
+}
