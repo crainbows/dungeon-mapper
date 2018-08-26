@@ -126,6 +126,8 @@ app.get('/dm/listmaps', function (req, res) {
     let fs = require('fs');
     let files = fs.readdirSync('./public/uploads');
     res.status(200).send(files.filter(el => el.match(/map[0-9]*\./g)));
+  }else{
+    res.sendStatus(403);
   }
 });
 
@@ -147,32 +149,37 @@ app.post('/dm/map', function (req, res) {
         }
       });
     }
+  }else{
+    res.sendStatus(403);
   }
 });
 
 // For DM map uploads. These are the raw images without any fog of war. 
 app.post('/upload', function (req, res) {
+  if( req.headers['host'] == 'localhost:3000' )  {
+    req.pipe(req.busboy);
 
-  req.pipe(req.busboy);
-
-  req.busboy.on('file', function (fieldname, file, filename) {
-    let randomNumber = Math.floor(Math.random() * 100000);
-    var fileExtension = filename.split('.').pop(),
-      uploadedImageSavePath = path.join(UPLOADS_DIR + 'map' + randomNumber + '.' + fileExtension),
-      fstream;
-            
-    deleteExistingMapFilesSync();
-            
-    fstream = fs.createWriteStream(uploadedImageSavePath);
-        
-    file.pipe(fstream);
-    fstream.on('close', function () {
-      console.log('map uploaded');
-      mostRecentRawImagePath = uploadedImageSavePath;
-      res.status(200).send({ imgPath: 'uploads/map' + randomNumber + '.' + fileExtension});
+    req.busboy.on('file', function (fieldname, file, filename) {
+      let randomNumber = Math.floor(Math.random() * 100000);
+      var fileExtension = filename.split('.').pop(),
+        uploadedImageSavePath = path.join(UPLOADS_DIR + 'map' + randomNumber + '.' + fileExtension),
+        fstream;
+              
+      deleteExistingMapFilesSync();
+              
+      fstream = fs.createWriteStream(uploadedImageSavePath);
+          
+      file.pipe(fstream);
+      fstream.on('close', function () {
+        console.log('map uploaded');
+        mostRecentRawImagePath = uploadedImageSavePath;
+        res.status(200).send({ imgPath: 'uploads/map' + randomNumber + '.' + fileExtension});
+      });
+      // should do something for a failure as well
     });
-    // should do something for a failure as well
-  });
+  }else{
+    res.status(403).send();
+  }
 
 });
 
