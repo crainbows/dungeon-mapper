@@ -3,43 +3,15 @@
 var request = require('supertest');
 var app = require('./app');
 
-
-describe('Testing player web access and responses', () => {
-  // Testing for players
-  test('Player - root page returns 200', async () => {
-    const response = await request(app).get('/');
-    expect(response.statusCode).toBe(200);
-  });
-
-  test('Player - dm page returns 403', async () => {
-    const response = await request(app).get('/dm');
-    expect(response.statusCode).toBe(403);
-  });
-
-  test('Player - quit page returns 403', async () => {
-    const response = await request(app).get('/quit');
-    expect(response.statusCode).toBe(403);
-  });
-
-  test('Player - dm/map page returns 403', async () => {
-    const response = await request(app).get('/dm/map');
-    expect(response.statusCode).toBe(403);
-  });
-
-  test('Player - send page with Base64 coded data returns 403', async () => {
-    const response = await request(app).post('/send')
-      .send({
-        imageData: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='
-      });
-    expect(response.statusCode).toBe(403);
-  });
-
-  test('Player - send page with no data returns 403',  async () => {
-    const response = await request(app).post('/send');
-    expect(response.statusCode).toBe(403);
-  });
-
-});
+// get /
+// get dm
+// get map
+// get quit
+// get dm/map
+// get dm/listmaps
+// post dm/map
+// post upload
+// post send
 
 
 describe('Testing DM web access and responses', () => {
@@ -75,4 +47,48 @@ describe('Testing DM web access and responses', () => {
     expect(response.body.success).toEqual(false);
   });
 
+});
+
+
+describe('Testing player web responses', () => {
+  // Testing for players
+  test('/ returns status 200', async () => {
+    const response = await request(app).get('/');
+    expect(response.statusCode).toBe(200);
+  });
+
+  test('/dm returns status 403', async () => {
+    const response = await request(app).get('/dm');
+    expect(response.statusCode).toBe(403);
+  });
+
+  test('/map returns type png/image', async () => {
+    const response = await request(app).get('/map');
+    expect(response.type).toBe('image/png');
+  });
+
+  test('/quit returns status 403', async () => {
+    const response = await request(app).get('/quit');
+    expect(response.statusCode).toBe(403);
+  });
+
+  test('/dm/map returns status 403', async () => {
+    const response = await request(app).get('/dm/map');
+    expect(response.statusCode).toBe(403);
+  });
+
+  test('/dm/listmaps returns status 403', async () => {
+    const response = await request(app).get('/dm/listmaps');
+    expect(response.statusCode).toBe(403);
+  });
+
+  test('/send returns 403',  async () => {
+    const response = await request(app).post('/send');
+    expect(response.statusCode).toBe(403);
+  });
+
+  test('/upload returns 403',  async () => {
+    const response = await request(app).post('/upload');
+    expect(response.statusCode).toBe(403);
+  });
 });
