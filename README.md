@@ -1,30 +1,25 @@
-Dungeon Mapper
-================
+# Dungeon Mapper &emsp; [![Travis (.org)](https://img.shields.io/travis/Crainbows/dungeon-mapper.svg?style=flat-square)](https://travis-ci.org/Crainbows/dungeon-mapper) [![Requires.io](https://img.shields.io/requires/github/Crainbows/dungeon-mapper.svg?style=flat-square)](https://requires.io/github/Crainbows/dungeon-mapper/requirements/) [![GitHub issues](https://img.shields.io/github/issues-raw/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![GitHub](https://img.shields.io/github/license/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![GitHub tag](https://img.shields.io/github/tag/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
+> Display digital maps to players of tabletop RPGs
 
-[![Travis (.org)](https://img.shields.io/travis/Crainbows/dungeon-mapper.svg?style=flat-square)](https://travis-ci.org/Crainbows/dungeon-mapper)
-[![Requires.io](https://img.shields.io/requires/github/Crainbows/dungeon-mapper.svg?style=flat-square)](https://requires.io/github/Crainbows/dungeon-mapper/requirements/)
-[![GitHub issues](https://img.shields.io/github/issues-raw/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
-[![Code Climate](https://img.shields.io/codeclimate/maintainability/Crainbows/dungeon-mapper.svg?style=flat-square)](https://codeclimate.com/github/Crainbows/dungeon-mapper)
-[![Code Climate](https://img.shields.io/codeclimate/coverage/Crainbows/dungeon-mapper.svg?style=flat-square)](https://codeclimate.com/github/Crainbows/dungeon-mapper)
-[![GitHub](https://img.shields.io/github/license/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
-[![GitHub tag](https://img.shields.io/github/tag/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper)
+This web app for tabletop RPGs allows the Dumgeon Master to reveal selected areas of a digital map to players. This allows you to keep certain areas of the map hidden from the players until they discover them.
 
+### DM's View
+![DM's view](images/DM-Example.PNG "DM's view")
+### Players View
+![Player's view](images/Player-Example.PNG "Player's view")
 
-A web app for tabletop gaming to allow the game master to reveal areas of the game map to players.
-Originally forked from `apclary/dungeon-revealer`, now updated, Refactored and maintained.
+Originally forked from [apclary/dungeon-revealer](https://github.com/apclary/dungeon-revealer), now updated, refactored and maintained with new features.
 
-What the DM Sees
-----------------
-![alt text](http://apclary.github.io/dungeon-revealer/img/example_dm_1.jpeg "DM's view")
+Example images used above from [Dungeon Mapster.](https://patreon.com/dungeonmapster/)
+## Installing / Getting started
 
-What the players see
---------------------
-![alt text](https://apclary.github.io/dungeon-revealer/img/example_player_1.jpeg "Player's view")
-
-
-Installation
-------------
-
+If you are happy using git, node and npm/yarn it is as simple as:
+```shell
+git clone https://github.com/Crainbows/dungeon-mapper.git
+npm install
+npm start
+```
+Otherwise you'll need the following:
 1. Install git. On Windows, I believe if you install the Github version of git it should add git automatically to your path.
 2. Go to https://nodejs.org/download/ and download and install Node. Node is the runtime for this software, which basically means you need it to make the software work. Only one person needs Node (assumed to be the DM). 
 3. Once Node is installed, open a command prompt. 
@@ -38,14 +33,40 @@ Installation
 
   * On some Windows machines, a firewall prompt will appear. Check all of the checkboxes and click OK.
 
-Use
----
+## Usage
 
-To use dungeon-mapper, the game master and the players must be on the same local network (usually a wifi network). The game master will start the server, navigate to the server's URL in a browser like Chrome, and then click on the Dungeon Master link. At this point, she will be prompted to upload an image file of the map to share with the other players. The other players will navigate to the server using their own browsers (laptop, tablet, or phone) and will remain at the home page. The connection information is displayed in command prompt for convenience.
+Once you have run `npm start` you should be given a local ip address for your players to use. If they enter this address in their browsers they will be ready to go.
 
-To clear areas of the map, click and draw on the map. If you clear too much, you can switch the brush to the "shadow brush" and restore some of the fog. Whenever you clear some of the fog of war from the map and is ready to share with the players, they will click "Send" and the revealed areas of the map will appear in the player's browsers. What appears as a shadow to the DM will appear as pure blackness to players, thus only revealing the cleared sections of the map to them.
+The DM needs to navigate to http://localhost:3000/dm on the same device the server was started on. They will then be able to begin uploading maps and removing the fog of war. Maps will remain until deleted but currently fog of war data will be deleted as soon as the DM browser window closes. If you have multiple displays or want to use streaming devices such as chromecast the DM can also open a second window and browse to http://localhost:3000 to see the same view as the players.
 
-To replace the existing map with a new image file, click "New Map".
+Once finished clicking the Quit button will shutdown the server.
 
-When finished go to click quit from the DM view.
+## Developing
 
+If you are interested in developing this project further get the dev dependencies to allow for testing and linting:
+
+```shell
+git clone https://github.com/Crainbows/dungeon-mapper.git
+cd dungeon-mapper/
+npm install --save-dev
+```
+We are open to pull requests and new features and ideas.
+
+### Built With
+- Vue.js
+- Jest
+- Webpack
+- Laravel Mix
+- Dropzone.js
+
+## Versioning
+
+We can maybe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [link to tags on this repository](/tags).
+
+## Style guide
+
+We currently use eslint:reccomended with slight modifications.
+
+## Licensing
+
+[MIT](/LICENSE)
