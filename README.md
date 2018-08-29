@@ -52,11 +52,18 @@ npm install --save-dev
 We are open to pull requests and new features and ideas.
 
 ### Built With
-- Vue.js
-- Jest
-- Webpack
-- Laravel Mix
-- Dropzone.js
+* Vue.js
+* Jest
+* Webpack
+* Laravel Mix
+* Dropzone.js
+
+### TODO
+ * Roll-up Map class into Vue component.
+    * Implement Template for Map Class
+ * Use fowContext.getImageData and fowContext.putImageData to save FoW long-term.
+    * Save FoW Data as JSON with same map name.
+ * Convert to Electron app.
 
 ## Versioning
 
