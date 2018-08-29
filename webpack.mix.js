@@ -19,7 +19,7 @@ mix.webpackConfig({
 mix.js('src/javascripts/player-app.js', 'public/javascripts/player-app.js')
   .js('src/javascripts/dm-app.js', 'public/javascripts/dm-app.js')
   .sass('src/stylesheets/style.scss', 'public/stylesheets/style.css');
-
+mix.disableNotifications();
 // Full API
 // mix.js(src, output);
 // mix.react(src, output); <-- Identical to mix.js(), but registers React Babel compilation.
