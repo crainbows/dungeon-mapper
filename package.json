@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel": "^6.23.0",
     "body-parser": "~1.18.2",
     "bootstrap": "^3.3.7",
     "connect-busboy": "0.0.2",
@@ -22,14 +23,14 @@
     "dropzone": "^5.5.1",
     "express": "~4.16.2",
     "jquery": "^3.3.1",
+    "laravel-mix": "^2.1.11",
     "morgan": "~1.9.0",
+    "node-sass": "^4.9.3",
     "pug": "^2.0.3",
     "serve-favicon": "~2.4.5",
     "socket.io": "^2.1.1",
     "vue": "^2.5.17",
-    "ws": "^6.0.0",
-    "babel": "^6.23.0",
-    "laravel-mix": "^2.1.11"
+    "ws": "^6.0.0"
   },
   "description": "Display digital maps to players of tabletop RPGs",
   "main": "app.js",
