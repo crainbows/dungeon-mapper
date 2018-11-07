@@ -1,5 +1,3 @@
-import jquery from 'jquery';
-const $ = jquery;
 import Brush from './brush';
 import * as canvas from './canvas';
 export default class Map {
@@ -46,7 +44,7 @@ export default class Map {
       parent.fowContext.strokeStyle = parent.brush.getCurrent();
   
       parent.fogMap();
-      parent.createRender();
+      // parent.createRender();
       parent.setUpDrawingEvents();
       parent.createDMToolbarListeners(parentElem.firstChild.firstChild);
       parent.setupCursorTracking();
@@ -58,13 +56,10 @@ export default class Map {
   }
 
   getMouseCoordinates(e) {
-    let viewportOffset = this.fowCanvas.getBoundingClientRect(),
-      borderTop = parseInt($(this.fowCanvas).css('border-top-width')),
-      borderLeft = parseInt($(this.fowCanvas).css('border-left-width'));
-  
+    let viewportOffset = this.fowCanvas.getBoundingClientRect();
     return {
-      x: (e.clientX - viewportOffset.left - borderLeft) / this.getMapDisplayRatio(),
-      y: (e.clientY - viewportOffset.top - borderTop) / this.getMapDisplayRatio()
+      x: (e.clientX - viewportOffset.left - 0) / this.getMapDisplayRatio(),
+      y: (e.clientY - viewportOffset.top - 0) / this.getMapDisplayRatio()
     };
   }
   
@@ -91,8 +86,8 @@ export default class Map {
     this.cursorCanvas.style.width = displayWidth + 'px';
     this.cursorCanvas.style.height = displayHeight + 'px';
   
-    if ($(window).width() > displayWidth) {
-      let offset = ($(window).width() - displayWidth) / 2;
+    if (window.innerWidth > displayWidth) {
+      let offset = (window.innerWidth - displayWidth) / 2;
       this.fowCanvas.style.left = offset + 'px';
       this.mapImageCanvas.style.left = offset + 'px';
       this.cursorCanvas.style.left = offset + 'px';
@@ -101,7 +96,7 @@ export default class Map {
   
   // Maybe having this here violates cohesion
   fitMapToWindow() {
-    let newDims = canvas.getOptimalDimensions(this.mapImageCanvas.width, this.mapImageCanvas.height, $(window).width(), $(window).height());
+    let newDims = canvas.getOptimalDimensions(this.mapImageCanvas.width, this.mapImageCanvas.height, window.innerWidth, window.innerHeight);
     this.resize(newDims[0], newDims[1]);
   }
   
@@ -298,17 +293,17 @@ export default class Map {
   
   createDMToolbarListeners(parentElem){
     const parent = this;
-    $(parentElem).find('.btn-shroud-all').click(function () {
+    parentElem.querySelector('.btn-shroud-all').addEventListener("click", function () {
       parent.fogMap();
       parent.createRender();
     });
     
-    $(parentElem).find('.btn-clear-all').click(function () {
+    parentElem.querySelector('.btn-clear-all').addEventListener("click", function () {
       parent.clearMap();
       parent.createRender();
     });
   
-    $(parentElem).find('.btn-toggle-brush').click(function () {
+    parentElem.querySelector('.btn-toggle-brush').addEventListener("click", function () {
       if (this.innerHTML === 'Clear Brush') {
         this.innerHTML = 'Shadow Brush';
       } else {
@@ -317,15 +312,15 @@ export default class Map {
       parent.brush.toggle();
     });
     
-    $(parentElem).find('.btn-shrink-brush').click(function () {
+    parentElem.querySelector('.btn-shrink-brush').addEventListener("click", function () {
       parent.brush.shrink();
     });
     
-    $(parentElem).find('.btn-enlarge-brush').click(function () {
+    parentElem.querySelector('.btn-enlarge-brush').addEventListener("click", function () {
       parent.brush.enlarge();
     });
     
-    $(parentElem).find('.btn-shape-brush').click(function () {
+    parentElem.querySelector('.btn-shape-brush').addEventListener("click", function () {
       if (this.innerHTML === 'Square Brush') {
         this.innerHTML = 'Circle Brush';
         parent.brush.shape = 'square'
@@ -339,22 +334,21 @@ export default class Map {
   
   //todo: move this functionality elsewhere
   createRender() {
-    this.removeRender();
     this.createPlayermapImage(this.mapImageCanvas, this.fowCanvas);
   }
   
-  removeRender() {
-    $('#render').remove();
-  }
-  
   createPlayermapImage(bottomCanvas, topCanvas) {
-    let mergedCanvas = canvas.mergeCanvas(bottomCanvas, topCanvas, this.width, this.height),
-      mergedImage = canvas.convertCanvasToImage(mergedCanvas);
-  
-    mergedImage.id = 'render';
-  
-    //todo: refactor this functionality outside
-    document.querySelector('#player-map-wrapper').appendChild(mergedImage);
+    let mergedCanvas = canvas.mergeCanvas(bottomCanvas, topCanvas, this.width, this.height);
+    let mergedImage = canvas.convertCanvasToImage(mergedCanvas);
+      
+    if(document.getElementById('render')){
+      // Render Exists
+      document.getElementById('render').src = mergedImage.src;
+    }else{
+      // No Render
+      mergedImage.id = 'render';
+      document.querySelector('#player-map-wrapper').appendChild(mergedImage);
+    }
   }
   
 }

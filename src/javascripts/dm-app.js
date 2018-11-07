@@ -1,8 +1,8 @@
-import dropzone from 'dropzone';
+import dropzone from 'dropzone';// TODO: Remove package in favour of built in packages.
 import Map from './map';
 import axios from 'axios';
 import Vue from 'vue';
-import $ from 'jquery/dist/jquery.slim';
+import $ from 'jquery/dist/jquery.slim'; // Required for dropzone
 window.jQuery = $;
 window.$ = $;
 require('bootstrap');
