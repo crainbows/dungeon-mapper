@@ -9,7 +9,7 @@
     "dev": "node node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "node node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production": "node node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "postinstall": "npm run production"
+    "postinstall": "yarn run production"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -19,7 +19,6 @@
     "connect-busboy": "0.0.2",
     "cookie-parser": "~1.4.3",
     "cookie-session": "~1.3.2",
-    "debug": "~3.1.0",
     "dropzone": "^5.5.1",
     "express": "~4.16.2",
     "jquery": "^3.3.1",

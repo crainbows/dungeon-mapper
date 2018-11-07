@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-var debug = require('debug')('dungeon-mapper');
 var app = require('../app');
 var http = app.http;
 var os = require('os');
@@ -14,7 +13,6 @@ var server = http.listen(app.get('port'), function() {
     message = 'Listening at http://localhost:' + port;
   
   console.log(message);
-  debug(message);
 
   console.log('Point your browser to that address');
       
