@@ -1,78 +1,28 @@
-# Dungeon Mapper &emsp; [![Travis (.org)](https://img.shields.io/travis/Crainbows/dungeon-mapper.svg?style=flat-square)](https://travis-ci.org/Crainbows/dungeon-mapper) [![Requires.io](https://img.shields.io/requires/github/Crainbows/dungeon-mapper.svg?style=flat-square)](https://requires.io/github/Crainbows/dungeon-mapper/requirements/) [![GitHub issues](https://img.shields.io/github/issues-raw/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![GitHub](https://img.shields.io/github/license/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![npm](https://img.shields.io/npm/v/dungeon-mapper.svg?style=flat-square)](https://www.npmjs.com/package/dungeon-mapper)
+# dungeon-mapper
 
-> Display digital maps to players of tabletop RPGs
+> An app that allows selective display of areas on game maps to players
 
-This web app for tabletop RPGs allows the Dumgeon Master to reveal selected areas of a digital map to players. This allows you to keep certain areas of the map hidden from the players until they discover them.
+#### Build Setup
 
-### DM's View
-![DM's view](images/DM-Example.PNG "DM's view")
-### Players View
-![Player's view](images/Player-Example.PNG "Player's view")
+``` bash
+# install dependencies
+npm install
 
-Originally forked from [apclary/dungeon-revealer](https://github.com/apclary/dungeon-revealer), now updated, refactored and maintained with new features.
+# serve with hot reload at localhost:9080
+npm run dev
 
-Example images used above from [Dungeon Mapster.](https://patreon.com/dungeonmapster/)
-## Installing / Getting started
+# build electron application for production
+npm run build
 
-If you are happy using git, node and npm/yarn it is as simple as:
-```shell
-npm install dungeon-mapper
-npm start
+# run unit & end-to-end tests
+npm test
+
+
+# lint all JS/Vue component files in `src/`
+npm run lint
+
 ```
-Otherwise you'll need the following:
-1. Go to https://nodejs.org/download/ and download and install Node. Node is the runtime for this software, which basically means you need it to make the software work. Only one person needs Node (assumed to be the DM). 
-2. Once Node is installed, open a command prompt. 
-  * For Mac users, press Command + Space and type "terminal" into Spotlight. Press enter and a prompt should open. 
-  * For Windows users, press the Windows key and type "command prompt" or "cmd" into the search box and then press enter.
-  * For Linux users, you already know how to open the command prompt.
-3. Using the command prompt, change to whatever directory you want to keep this program in. 
-4. Once you are in that directory, type `git clone https://github.com/Crainbows/dungeon-mapper.git ./` into the command prompt and press enter.
-5. Then type `npm install` into the command prompt and press enter and wait a little bit while it installs.
-6. Once it's done type `npm start` into the prompt. Some messages should appear letting you know where to naviagte to in your web browser.
 
-  * On some Windows machines, a firewall prompt will appear. Check all of the checkboxes and click OK.
+---
 
-## Usage
-
-Once you have run `npm start` you should be given a local ip address for your players to use. If they enter this address in their browsers they will be ready to go.
-
-The DM needs to navigate to http://localhost:3000/dm on the same device the server was started on. They will then be able to begin uploading maps and removing the fog of war. Maps will remain until deleted but currently fog of war data will be deleted as soon as the DM browser window closes. If you have multiple displays or want to use streaming devices such as chromecast the DM can also open a second window and browse to http://localhost:3000 to see the same view as the players.
-
-Once finished clicking the Quit button will shutdown the server.
-
-## Developing
-
-If you are interested in developing this project further get the dev dependencies to allow for testing and linting:
-
-```shell
-git clone https://github.com/Crainbows/dungeon-mapper.git
-cd dungeon-mapper/
-npm install --save-dev
-```
-We are open to pull requests and new features and ideas.
-
-### Built With
-* Vue.js
-* Jest
-* Webpack
-* Laravel Mix
-* Dropzone.js
-
-### TODO
- * Roll-up Map class into Vue component.
-    * Implement Template for Map Class
- * Use fowContext.getImageData and fowContext.putImageData to save FoW long-term.
-    * Save FoW Data as JSON with same map name.
- * Convert to Electron app.
-
-## Versioning
-
-We can maybe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [link to tags on this repository](/tags).
-
-## Style guide
-
-We currently use eslint:reccomended with slight modifications.
-
-## Licensing
-
-[MIT](/LICENSE)
+This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[8fae476](https://github.com/SimulatedGREG/electron-vue/tree/8fae4763e9d225d3691b627e83b9e09b56f6c935) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
