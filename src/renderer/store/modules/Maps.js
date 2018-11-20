@@ -10,7 +10,8 @@ const state = {
       state.selectedMap = payload.mapKey;
     },
     newMap (state, payload) {
-      state.MapList.push({name: 'mapname', filename: payload.filename})
+      let mapName = payload.filename.split('\\');
+      state.MapList.push({name: mapName[mapName.length-1], filename: payload.filename})
     }
   };
   
