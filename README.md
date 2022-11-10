@@ -1,5 +1,7 @@
 # Dungeon Mapper &emsp; [![Travis (.org)](https://img.shields.io/travis/Crainbows/dungeon-mapper.svg?style=flat-square)](https://travis-ci.org/Crainbows/dungeon-mapper) [![Requires.io](https://img.shields.io/requires/github/Crainbows/dungeon-mapper.svg?style=flat-square)](https://requires.io/github/Crainbows/dungeon-mapper/requirements/) [![GitHub issues](https://img.shields.io/github/issues-raw/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![GitHub](https://img.shields.io/github/license/Crainbows/dungeon-mapper.svg?style=flat-square)](https://github.com/Crainbows/dungeon-mapper) [![npm](https://img.shields.io/npm/v/dungeon-mapper.svg?style=flat-square)](https://www.npmjs.com/package/dungeon-mapper)
 
+Archived: Originally forked from [apclary/dungeon-revealer](https://github.com/apclary/dungeon-revealer) at a time when it was unmaintained. That project has since been revived with many excellent features added and should be used instead of this project.
+
 > Display digital maps to players of tabletop RPGs
 
 This web app for tabletop RPGs allows the Dumgeon Master to reveal selected areas of a digital map to players. This allows you to keep certain areas of the map hidden from the players until they discover them.
